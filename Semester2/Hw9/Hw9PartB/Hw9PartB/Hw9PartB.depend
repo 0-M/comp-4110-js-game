@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1428210537 source:c:\users\zack\desktop\thatrepositorytho\semester2\hw9\hw9partb\hw9partb\binarysearchtree_b.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"BinarySearchTree_b.h"
+
+1428210466 c:\users\zack\desktop\thatrepositorytho\semester2\hw9\hw9partb\hw9partb\binarysearchtree_b.h
+
+1428210317 source:c:\users\zack\desktop\thatrepositorytho\semester2\hw9\hw9partb\hw9partb\testbst_b.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"BinarySearchTree_b.h"
+

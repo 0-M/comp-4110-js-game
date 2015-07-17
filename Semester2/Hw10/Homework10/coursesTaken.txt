@@ -1,0 +1,9 @@
+42101,College Writing I,Fall 14,Paul Francoeur,1
+92128,Calculus IA,Fall 14,Sunghye Kim,0
+91101,Computing I,Fall 14,Sarita Hakimian,1
+91103,Computing I Lab,Fall 14,Sarita Hakimian,1
+42102,College Writing II,Spring 15,David Tennant,1
+49201,Ecomonmic I,Spring 15,Nien-Huei Jiang,1
+91102,Computing II,Spring 15,Olga Lepsky,1
+91104,Computing II Lab,Ke Huang,1
+92129,Calculus IB,Candice Weston,0
