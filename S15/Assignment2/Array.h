@@ -1,0 +1,11 @@
+typedef int Data;
+typedef int* ArrayPtr;
+ArrayPtr initArray(int capacity);
+Data check(ArrayPtr ar,int num_elements,int position);
+void add(ArrayPtr* par, int* p_num_elements, int * pcapacity, Data data, int position);
+void replaceDat(ArrayPtr ar, int num_elements, int position, Data data);
+void display(ArrayPtr ar, int num_elements);
+void removeDat(ArrayPtr ar, int* p_num_elements, int position);
+void emptyArr(ArrayPtr ar, int* p_num_elements);
+int isEmpty(ArrayPtr ar, int* p_num_elements);
+ArrayPtr destroy(ArrayPtr ar, int num_elements,int capacity);

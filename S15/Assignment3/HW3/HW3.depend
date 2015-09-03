@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1424213362 source:c:\users\zack\desktop\thatrepositorytho\semester2\assignment3\hw3\array.c
+	<stdio.h>
+	<stdlib.h>
+	"Array.h"
+
+1424050464 c:\users\zack\desktop\thatrepositorytho\semester2\assignment3\hw3\array.h
+
+1424037849 source:c:\users\zack\desktop\thatrepositorytho\semester2\assignment3\hw3\arraytest.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"Array.h"
+
+1424216673 source:c:\users\zack\desktop\thatrepositorytho\semester2\assignment3\hw3\arraytimemeas.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"Array.h"
+

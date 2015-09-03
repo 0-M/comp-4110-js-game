@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1424214644 source:c:\users\zack\desktop\thatrepositorytho\semester2\assignment3\hw3linkedlist\linkedlist.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+
+1424214593 c:\users\zack\desktop\thatrepositorytho\semester2\assignment3\hw3linkedlist\linkedlist.h
+
+1424216873 source:c:\users\zack\desktop\thatrepositorytho\semester2\assignment3\hw3linkedlist\linkedlisttimemeas.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<sys/time.h>
+	"LinkedList.h"
+
