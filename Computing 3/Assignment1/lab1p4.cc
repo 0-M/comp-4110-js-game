@@ -6,11 +6,6 @@
 #include <cstdlib>
 #include <cmath>
 
-using  std::cout;
-using  std::cin;
-using  std::endl;
-using  std::abs;
-
 long long factorial(int num) //works for any number one through 20, any more is over a 64 bit integer
 {
     long long fact = num; //holds the resulting factorial -- initially set to given number
@@ -27,11 +22,11 @@ int main()
     {
         int num = 0; //user input number
         long long res = 0; //result
-        cout << "Please input an number, it will be turned into a positive integer: ";
-        cin >> num;
-        num = abs(num);
+        std::cout << "Please input an number, it will be turned into a positive integer: ";
+        std::cin >> num;
+        num = std::abs(num);
         res = factorial(num);
-        cout << "The factorial of " << num << " is " << res << endl << endl;
+        std::cout << "The factorial of " << num << " is " << res << ".\n\n";
     }
     return 0;
 }
