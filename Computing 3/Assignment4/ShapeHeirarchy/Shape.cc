@@ -75,7 +75,7 @@ Shape::Shape() //default constructor
 {
     name = "Shape";
 }
-Shape::Shape(string argName) //constructor with name given
+Shape::Shape(string argName) : type(0) //constructor with name given
 {
     name = argName;
 }
@@ -83,15 +83,21 @@ string Shape::getName() //getter for name
 {
     return name;
 }
+int Shape::getType()
+{
+    return type;
+}
 
 //Shape 2d
 Shape2d::Shape2d(string name) : Shape(name) //constructor with name for shape
 {
+    type = 1;
 // doesn't do anything
 }
 //Shape 3d
 Shape3d::Shape3d(string name) : Shape(name) //constructor with name for shape
 {
+    type = 2;
 //doesn't do anything
 }
 
@@ -283,6 +289,6 @@ double Tetrahedron::getVolume()
     p = dimensions[3].getX();
     q = dimensions[3].getY();
     r = dimensions[3].getZ();
-    volume = fabs((((a - p)*(e - q)*(i - r)) + ((d - p)*(h - q)*(c - r)) + ((g - p)*(b - q)*(f - r)) - ((g - p)*(e - q)*(c - r)) - ((a - p)*(h - q)*(f - r)) - ((d - p)*(b - q)*(i - r)))/ .0);
+    volume = fabs((((a - p)*(e - q)*(i - r)) + ((d - p)*(h - q)*(c - r)) + ((g - p)*(b - q)*(f - r)) - ((g - p)*(e - q)*(c - r)) - ((a - p)*(h - q)*(f - r)) - ((d - p)*(b - q)*(i - r)))/6.0);
     return volume;
 }

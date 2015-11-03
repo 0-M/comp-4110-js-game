@@ -49,10 +49,13 @@ class Shape
 {
 protected:
     string name;
+    int type;
 public:
     Shape(); //default constructor
     Shape(string argName); //constructor with name given
     virtual double getArea() = 0;
+    virtual double getVolume(){return 0;}
+    int getType();
     string getName(); //getter for name
 };
 
@@ -63,6 +66,7 @@ protected:
 public:
     Shape2d(string name); //constructor with name for shape
     virtual double getArea() = 0;
+    virtual double getVolume(){return 0;}
 };
 
 class Shape3d : public Shape
@@ -83,6 +87,7 @@ public:
     Circle(double x,double y,double r); //constructor with origin x,y and circles radius
     double getRadius(); //returns radius
     virtual double getArea();
+    virtual double getVolume(){return 0;}
 };
 
 class Square : public Shape2d
@@ -95,6 +100,7 @@ public:
     double getLength(); //returns length
     double getWidth(); //returns width
     virtual double getArea();
+    virtual double getVolume(){return 0;}
 
 };
 
@@ -106,6 +112,7 @@ public:
     Triangle(double *arr); //constructor with all the points
     Triangle(Point3d a,Point3d b,Point3d c);
     virtual double getArea();
+    virtual double getVolume(){return 0;}
 };
 
 class Sphere : public Shape3d
