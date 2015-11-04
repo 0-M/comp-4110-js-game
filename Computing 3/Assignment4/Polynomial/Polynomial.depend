@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1446617789 source:c:\users\zack\desktop\thatrepositorytho\computing 3\assignment4\polynomial\polynomial.cc
+	<iostream>
+	<cstdlib>
+	<algorithm>
+	<vector>
+	<functional>
+	<string>
+	<cmath>
+	<typeinfo>
+	"Polynomial.h"
+
+1446616896 c:\users\zack\desktop\thatrepositorytho\computing 3\assignment4\polynomial\polynomial.h
+	<iostream>
+	<cstdlib>
+	<vector>
+	<string>
+	<cmath>
+
+1446618969 source:c:\users\zack\desktop\thatrepositorytho\computing 3\assignment4\polynomial\polynomial_client.cc
+	<iostream>
+	<cstdlib>
+	<vector>
+	<algorithm>
+	<string>
+	<cmath>
+	"Polynomial.h"
+
