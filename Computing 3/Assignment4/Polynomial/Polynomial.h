@@ -46,6 +46,7 @@ public:
     Polynomial& operator-=(const Polynomial &rhs); // a = a + rhs
     friend Polynomial operator*(const Polynomial &a,const Polynomial &b); //a * b
     Polynomial operator*=(const Polynomial &rhs);
+    Polynomial operator=(const Polynomial &rhs); //a = b
 };
 
 bool isGreater(Term a,Term b);

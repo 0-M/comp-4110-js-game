@@ -90,7 +90,8 @@ void Polynomial::likeTerms() //combine like terms
         //  cout << "i: " << i << endl;
         double coEff = 0;
         double num = poly[i].getExponent();
-        vector<unsigned int> hasNum {i};
+        vector<unsigned int> hasNum;
+        hasNum.push_back(i);
         for(unsigned int z = i + 1; z < poly.size(); z++)
         {
             //   cout << "num: " << num << endl;
@@ -220,12 +221,9 @@ Polynomial operator*(const Polynomial &a,const Polynomial &b)
             for(size_t j = 0; j < y; j++)
             {
                 exp = temp2.poly[i].getExponent() + temp.poly[j].getExponent();
-                // cout << endl << "exp: " << exp << endl;
                 coeff = temp2.poly[i].getCoefficient() * temp.poly[j].getCoefficient();
-                // cout << endl << "coeff: " << coeff << endl;
                 Term tempT(coeff,exp);
                 temp3.addTerm(tempT);
-                //cout << temp3 << endl;
             }
         }
         temp4 = temp3;
@@ -234,7 +232,6 @@ Polynomial operator*(const Polynomial &a,const Polynomial &b)
     }
     else
     {
-        //cout << "here 1" << endl;;
         x = temp.poly.size();
         y = temp2.poly.size();
         for(size_t i = 0; i < x; i++)
@@ -242,20 +239,15 @@ Polynomial operator*(const Polynomial &a,const Polynomial &b)
             for(size_t j = 0; j < y; j++)
             {
                 exp = temp.poly[i].getExponent() + temp2.poly[j].getExponent();
-                // cout << endl << "exp: " << exp << endl;
                 coeff = temp.poly[i].getCoefficient() * temp2.poly[j].getCoefficient();
-                // cout << endl << "coeff: " << coeff << endl;
                 Term tempT(coeff,exp);
                 temp3.addTerm(tempT);
-                //cout << temp3 << endl;
             }
         }
         temp4 = temp3;
         temp4.likeTerms();
         temp4.sortPoly();
     }
-    //cout << "x: " << x << endl;
-    //cout << "y: " << y << endl;
 
     return temp4;
 }
@@ -267,12 +259,8 @@ Polynomial Polynomial::operator*=(const Polynomial &rhs)
     temp2.sortPoly();
     temp.likeTerms();
     temp2.likeTerms();
-    //cout << "capacity: " << temp3.poly.capacity();
-    //cout << "Temp: " << temp;
-    //cout << "Temp2: " << temp2;
     if(temp.poly.size() > temp2.poly.size())
     {
-        //cout << "here 2" << endl;
         y = temp.poly.size();
         x = temp2.poly.size();
         for(size_t i = 0; i < x; i++)
@@ -280,12 +268,9 @@ Polynomial Polynomial::operator*=(const Polynomial &rhs)
             for(size_t j = 0; j < y; j++)
             {
                 exp = temp2.poly[i].getExponent() + temp.poly[j].getExponent();
-                // cout << endl << "exp: " << exp << endl;
                 coeff = temp2.poly[i].getCoefficient() * temp.poly[j].getCoefficient();
-                // cout << endl << "coeff: " << coeff << endl;
                 Term tempT(coeff,exp);
                 temp3.addTerm(tempT);
-                //cout << temp3 << endl;
             }
         }
         temp4 = temp3;
@@ -295,7 +280,6 @@ Polynomial Polynomial::operator*=(const Polynomial &rhs)
     }
     else
     {
-        //cout << "here 1" << endl;;
         x = temp.poly.size();
         y = temp2.poly.size();
         for(size_t i = 0; i < x; i++)
@@ -303,12 +287,9 @@ Polynomial Polynomial::operator*=(const Polynomial &rhs)
             for(size_t j = 0; j < y; j++)
             {
                 exp = temp.poly[i].getExponent() + temp2.poly[j].getExponent();
-                // cout << endl << "exp: " << exp << endl;
                 coeff = temp.poly[i].getCoefficient() * temp2.poly[j].getCoefficient();
-                // cout << endl << "coeff: " << coeff << endl;
                 Term tempT(coeff,exp);
                 temp3.addTerm(tempT);
-                //cout << temp3 << endl;
             }
         }
         temp4 = temp3;
@@ -316,9 +297,15 @@ Polynomial Polynomial::operator*=(const Polynomial &rhs)
         temp4.sortPoly();
         *this = temp4;
     }
-    //cout << "x: " << x << endl;
-    //cout << "y: " << y << endl;
 
+    return *this;
+}
+
+Polynomial Polynomial::operator=(const Polynomial &rhs)
+{
+    vector<Term> temp;
+    temp = rhs.poly;
+    this->poly = temp;
     return *this;
 }
 

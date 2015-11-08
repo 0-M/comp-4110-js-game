@@ -74,9 +74,15 @@ int main(int argc, char* argv[])
     cout << "Testing *:  [" << test << "] * [" << test2 << "]" << endl << endl;
     test3 = test2 * test; //Multiplication
     cout << "Result: " << test3 << endl << endl;
+    reset(&test,&test2,&test3);
     cout << "Testing *=:  [" << test << "] * [" << test2 << "]" << endl << endl;
-    test*= test2; //Multiplication assignment
+    test *= test2; //Multiplication assignment
+    cout << "Result: " << test << endl << endl;
+    reset(&test,&test2,&test3);
+    cout << "Testing =:  [" << test3 << "] = [" << test2 << "]" << endl << endl;
+    test3 = test2; //Multiplication assignment
     cout << "Result: " << test3 << endl << endl;
+
 
 
 
