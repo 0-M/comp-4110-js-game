@@ -34,9 +34,6 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="../../../../temp.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Unit filename="clustering.cc" />
 		<Unit filename="clustering.h" />
 		<Unit filename="clustering_client.cc" />

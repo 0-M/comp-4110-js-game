@@ -7,14 +7,6 @@
 #include "clustering.h"
 using namespace std;
 
-
-
-
-
-
-
-
-
 // Cluster
 
 Cluster::Cluster(unsigned int arg)
@@ -29,7 +21,6 @@ void Cluster::printCluster()
 {
     for(unsigned int i = 0; i < vect.size(); i++)
     {
-        // cout << i + 1 << ": ";
         for(unsigned int j = 0; j < dimensions; j++)
         {
             cout << vect[i][j] << " ";
@@ -37,8 +28,6 @@ void Cluster::printCluster()
         cout << endl;
     }
     cout << endl;
-    // printCentroid();
-    //  printRunningSum();
 }
 void Cluster::addVect(vector<double> arg)
 {
@@ -55,18 +44,10 @@ void Cluster::addVect(vector<double> arg)
 }
 void Cluster::findCentroid()
 {
-    //vector<double> temp;
     for(unsigned int i = 0; i < dimensions; i++)
     {
-//        double sum = 0;
-//        for(unsigned int j = 0;j < vect.size();j++)
-//        {
-//            sum = sum + vect[j][i];
-//        }
-//        temp.push_back(sum);
         runningSum[i] = runningSum[i] + vect.back()[i];
     }
-    //runningSum = temp;
     for(unsigned int i = 0; i < runningSum.size(); i++)
     {
         centroid.at(i) = (runningSum[i]/vect.size());
@@ -153,18 +134,10 @@ void ClusterHolder::mergeClosest()
             }
         }
     }
-    // cout << "arr[0]: " << "l" << arr[0] + 1 << endl;
-    // cout << "arr[1]: " << "l" << arr[1] + 1 << endl;
     if(holder[arr[0]].getNumVec() < holder[arr[1]].getNumVec()) //put offset of the bigger cluster in arr[0]
     {
-//       toMerge = arr[0];
         swap(arr[0],arr[1]);
     }
-//    else
-//    {
-//        toMerge = arr[1];
-//    }
-    // cout << "toMerge: " << toMerge + 1 << endl;
     forMerge = holder[arr[1]].getCluster();
     for(unsigned int t = 0; t < forMerge.size(); t++) //for each entry in the smaller cluster
     {
