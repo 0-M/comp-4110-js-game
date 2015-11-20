@@ -10,27 +10,38 @@ using namespace std;
 
 class Cluster
 {
-protected:
-vector<vector<double> > vect;
-
+private:
+    vector<vector<double> > vect;
+    vector<double> centroid;
+    vector<double> runningSum; //running sum of each coordinate in the cluster
+    unsigned int dimensions; //size of each vector, number of dimensions
 public:
-Cluster(); //constructor
-vector<vector<double> > * getClusterLoc(); //getter
-void setClusterLoc(); //setter
-
+    Cluster(unsigned int arg);
+    vector<vector<double> > getCluster(); //getter
+    void printCluster();
+    void addVect(vector<double> arg);
+    void findCentroid();
+    vector<double> getCentroid();
+    void printCentroid();
+    void printRunningSum();
+    unsigned int getDimensions();
+    unsigned int getNumVec();
 
 
 };
 
 class ClusterHolder
 {
-protected:
-vector<vector<vector<double> > > clusterHold;
+private:
+    vector<Cluster> holder;
 
 public:
-ClusterHolder(); // constructor
-vector<vector<vector<double> > > * getHolderLoc(); //getter
-void setHolderLoc(); //setter
+    void printHolder();
+    void addCluster(Cluster arg);
+    double findDist(Cluster arg,Cluster arg2,unsigned int dim);
+    void mergeClosest();
+    vector<Cluster> getHolder();
+    unsigned int getSize();
 
 
 };

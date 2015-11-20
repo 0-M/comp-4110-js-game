@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1447912930 source:c:\users\zack\desktop\thatrepositorytho\computing 3\project\projectpart1\clustering.cc
+1447981188 source:c:\users\zack\desktop\thatrepositorytho\computing 3\project\projectpart1\clustering.cc
 	<iostream>
 	<cstdlib>
 	<algorithm>
@@ -8,7 +8,7 @@
 	<cmath>
 	"clustering.h"
 
-1447915952 c:\users\zack\desktop\thatrepositorytho\computing 3\project\projectpart1\clustering.h
+1447980569 c:\users\zack\desktop\thatrepositorytho\computing 3\project\projectpart1\clustering.h
 	<iostream>
 	<cstdlib>
 	<algorithm>
@@ -16,8 +16,9 @@
 	<string>
 	<cmath>
 
-1447915481 source:c:\users\zack\desktop\thatrepositorytho\computing 3\project\projectpart1\clustering_client.cc
+1447982110 source:c:\users\zack\desktop\thatrepositorytho\computing 3\project\projectpart1\clustering_client.cc
 	<stdio.h>
+	<string.h>
 	<iostream>
 	<cstdlib>
 	<algorithm>
