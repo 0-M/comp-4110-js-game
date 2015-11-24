@@ -112,7 +112,7 @@ double ClusterHolder::findDist(Cluster arg,Cluster arg2,unsigned int dim)
 void ClusterHolder::mergeClosest()
 {
     vector<vector<double> > forMerge;
-    unsigned int arr[2] = {0,0},temp;
+    unsigned int arr[2] = {0,1},temp;
     double dist = -1,lowestDist = -1;
     temp = holder[0].getDimensions();
     for(unsigned int i = 0; i < holder.size() - 1; i++)
