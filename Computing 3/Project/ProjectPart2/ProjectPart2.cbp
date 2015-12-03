@@ -11,6 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="2" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -32,7 +33,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="main.cpp" />
+		<Unit filename="clustering2.cc" />
+		<Unit filename="clustering2.h" />
+		<Unit filename="clustering2_client.cc" />
+		<Unit filename="input.txt" />
+		<Unit filename="output.txt" />
 		<Extensions>
 			<code_completion />
 			<envvars />

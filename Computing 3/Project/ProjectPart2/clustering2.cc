@@ -107,8 +107,7 @@ void ClusterHolder::mergeClosest(unsigned int desiredClusters)
     while(holder.size() != desiredClusters)
     {
         genDists(&dists,newLoc);
-        cout << endl << endl;
-        twoLowest = findTwoLowest(&dists);
+        twoLowest = findTwoLowest(&dists,holder.size());
         if(holder[twoLowest[0].getArr()[0]].getNumVec() < holder[twoLowest[0].getArr()[1]].getNumVec()) //put offset of the bigger cluster in arr[0]
         {
             swap(twoLowest[0].getArr()[0],twoLowest[0].getArr()[1]);
@@ -118,6 +117,16 @@ void ClusterHolder::mergeClosest(unsigned int desiredClusters)
         {
             newLoc = newLoc - 1;
         }
+        if(twoLowest[1].getArr()[0] > twoLowest[0].getArr()[1]) //lower the index if it is above the element that will be removed
+        {
+            twoLowest[1].setArr(twoLowest[1].getArr()[0] - 1,twoLowest[1].getArr()[1]);
+        }
+
+        if(twoLowest[1].getArr()[1] > twoLowest[0].getArr()[1]) //lower the index if it is above the element that will be removed
+        {
+            twoLowest[1].setArr(twoLowest[1].getArr()[0],twoLowest[1].getArr()[1] - 1);
+        }
+
         cout << "Merging: cluster: ";
         holder[twoLowest[0].getArr()[0]].printCluster();
         cout << "         cluster: ";
@@ -164,8 +173,6 @@ void ClusterHolder::genDists(vector<Distances> * arg,unsigned int compLoc)
         Cluster temp = holder[compLoc];
         for(unsigned int i = 0; i < holder.size(); i++)
         {
-            cout << "comp loc: " << compLoc << endl;
-            cout << "i: " << i << endl;
             if(i != compLoc)
             {
                 Distances temp;
@@ -175,7 +182,7 @@ void ClusterHolder::genDists(vector<Distances> * arg,unsigned int compLoc)
             }
             else
             {
-               i = i + 1;
+                i = i + 1;
             }
         }
     }
@@ -189,12 +196,14 @@ void ClusterHolder::printDists(vector<Distances> arg)
         arg[i].printDistances();
     }
 }
-vector<Distances> ClusterHolder::findTwoLowest(vector<Distances> * arg)
+vector<Distances> ClusterHolder::findTwoLowest(vector<Distances> * arg,unsigned int numClust)
 {
     vector<Distances> temp;
     unsigned int l1,l2;
     Distances t1,t2;
     t1.setDist(-1);
+    t2.setDist(-1);
+    t2.setArr(0,0);
     for(unsigned int i = 0; i < arg->size(); i++)
     {
         if(t1.getDist() < 0)
@@ -208,20 +217,23 @@ vector<Distances> ClusterHolder::findTwoLowest(vector<Distances> * arg)
     }
     l1 = t1.getArr()[0];
     l2 = t1.getArr()[1];
-    for(unsigned int i = 0; i < (*arg).size(); i++)
+    if(numClust > 3)
     {
-        unsigned int temp2[2];
-        unsigned int * tempPoint = (*arg)[i].getArr();
-        temp2[0] = tempPoint[0];
-        temp2[1] = tempPoint[1];
-        if(t2.getDist() < 0 && temp2[0] !=  l1 && temp2[0] != l2 && temp2[1] !=  l1 && temp2[1] != l2)
+        for(unsigned int i = 0; i < (*arg).size(); i++)
         {
-            t2 = (*arg)[i];
-        }
-        else
-        {
-            arg->erase(arg->begin() + i);
-            i = i - 1;
+            unsigned int temp2[2];
+            unsigned int * tempPoint = (*arg)[i].getArr();
+            temp2[0] = tempPoint[0];
+            temp2[1] = tempPoint[1];
+            if(t2.getDist() < 0 && temp2[0] !=  l1 && temp2[0] != l2 && temp2[1] !=  l1 && temp2[1] != l2)
+            {
+                t2 = (*arg)[i];
+            }
+            else
+            {
+                arg->erase(arg->begin() + i);
+                i = i - 1;
+            }
         }
     }
     temp.push_back(t1);

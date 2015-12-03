@@ -52,7 +52,7 @@ public:
     void mergeClosest(unsigned int desiredClusters);
     void genDists(vector<Distances> * arg,unsigned int compLoc);
     void printDists(vector<Distances> arg);
-    vector<Distances> findTwoLowest(vector<Distances> * arg); //finds the lowest and the second lowest distance
+    vector<Distances> findTwoLowest(vector<Distances> * arg,unsigned int numClust); //finds the lowest and the second lowest distance
     vector<Cluster> getHolder();
     unsigned int getSize();
     double eucDist(vector<double> arg,vector<double> arg2,unsigned int dim);
