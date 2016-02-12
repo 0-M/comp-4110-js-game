@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1449592027 source:c:\users\zack\desktop\thatrepositorytho\computing 3\project2\project2_2\poker.cc
+	<iostream>
+	<cstdlib>
+	<string>
+	<vector>
+	"Poker.h"
+	<time.h>
+	<algorithm>
+
+1449620200 c:\users\zack\desktop\thatrepositorytho\computing 3\project2\project2_2\poker.h
+	<iostream>
+	<cstdlib>
+	<string>
+	<vector>
+
+1449451716 source:c:\users\zack\desktop\thatrepositorytho\computing 3\project2\project2_2\poker_client.cc
+	<iostream>
+	<cstdlib>
+	<string>
+	"Poker.h"
+
