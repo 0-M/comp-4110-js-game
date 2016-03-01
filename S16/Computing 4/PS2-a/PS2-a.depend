@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1454972186 source:c:\users\zack\desktop\thatrepositorytho\s16\ps2-a\lsfr.cpp
+	"LSFR.hpp"
+
+1454971913 c:\users\zack\desktop\thatrepositorytho\s16\ps2-a\lsfr.hpp
+	<vector>
+	<iostream>
+	<cstring>
+	<stdlib.h>
+
+1454976275 source:c:\users\zack\desktop\thatrepositorytho\s16\ps2-a\test.cpp
+	"LFSR.hpp"
+
+1454973982 source:c:\users\zack\desktop\thatrepositorytho\s16\ps2-a\lfsr.cpp
+	"LFSR.hpp"
+
+1454973983 c:\users\zack\desktop\thatrepositorytho\s16\ps2-a\lfsr.hpp
+	<vector>
+	<iostream>
+	<cstring>
+	<stdlib.h>
+
+1455484617 source:c:\users\zack\desktop\thatrepositorytho\s16\ps2-a\lfsr_class.cpp
+	"lfsr_class.hpp"
+
+1455490516 c:\users\zack\desktop\thatrepositorytho\s16\ps2-a\lfsr_class.hpp
+	<stdlib.h>
+	<cstring>
+	<vector>
+	<iostream>
+
