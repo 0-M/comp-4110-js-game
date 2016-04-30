@@ -2,6 +2,9 @@
 
 namespace space {
 
+Body::Body() : SpaceObject() {}
+
+
 Body::Body(double x_velocity, double y_velocity, double ux_velocity,
   double uy_velocity, double mass, double x, double y, double ux,
   double uy, std::string file_name) : SpaceObject(x_velocity, 
@@ -19,14 +22,24 @@ void Body::draw(sf::RenderTarget& target, sf::RenderStates states) const {
   target.draw(sprite_);
 }
 
+void Body::step(double seconds) {
+  // (seconds * x_velocity_) + x_
+  x_ = x_ + (seconds * x_velocity_);
+  // (seconds * y_velocity_) + y_
+  y_ = y_ + (seconds * y_velocity_);
+  
+  // Reset the position of the sprite
+  sprite_.setPosition(sf::Vector2f(x_, y_));
+}
+
 
 }  // namespace space
 
-
+/*DEBUG MAIN
 int main(){
   sf::RenderWindow window(sf::VideoMode(400,400), "test");
   
-  space::Body b(0.0,0.0,0.0,0.0,0.0, 25.0,25.0, 0.0,0.0, "sun.png");
+  space::Body b(2.0,0.0,0.0,0.0,0.0, 25.0,25.0, 0.0,0.0, "sun.png");
 
   while(window.isOpen()) {
     sf::Event event;
@@ -36,9 +49,10 @@ int main(){
         window.close();
     }
     window.clear();
+    b.step(0.1);
     window.draw(b);
     window.display();
   }
 
   return 0;
-}
+}*/
