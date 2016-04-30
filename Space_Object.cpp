@@ -35,7 +35,7 @@ double SpaceObject::getUy_Velocity() const {return uy_velocity_;}
 double SpaceObject::getMass() const {return mass_;}
 double SpaceObject::getX() const {return x_;}
 double SpaceObject::getY() const {return y_;}
-double SpaceObject::getUx() const {return uy_;}
+double SpaceObject::getUx() const {return ux_;}
 double SpaceObject::getUy() const {return uy_;}
 
 
