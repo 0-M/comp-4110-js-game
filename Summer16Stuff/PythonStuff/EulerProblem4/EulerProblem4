@@ -7,15 +7,12 @@ def flipNum(numToFlip,count):
         i //= 10
     return num2
 
-i = 9801
-found = False
-while found == False:
-    num2 = flipNum(i,3)
-    if num2 == i:
-        print("i: ",i)
-        print("num2: ",num2)
-        found = True
-    else:
-        i -= 1
-print(num2)
-
+i = 999
+while i > 990:
+    j = 999
+    while j > 900:
+         if flipNum(i * j,5) == i * j:
+             print(i * j)
+        #print(i," x ",j)
+         j -= 1
+    i -= 1
