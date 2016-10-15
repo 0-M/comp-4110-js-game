@@ -1,0 +1,18 @@
+def checktrue(checkNum,numCheckAgainst):
+    i = 1
+    isTrue = True
+    while i < numCheckAgainst:
+        if checkNum % i != 0:
+            isTrue = False
+        i += 1
+    return isTrue
+
+found = False
+num = 2520
+while found == False:
+    temp = checktrue(num,20)
+    if temp == True:
+        found = True
+    else:
+        num += 2520
+print(num)
