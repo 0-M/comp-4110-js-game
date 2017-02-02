@@ -1,1 +1,7 @@
 This game will probably use phaser or some other JS engine
+
+
+to test movement example (requires python on your system):
+ - cd this-repo/movement
+ - python -m SimpleHTTPServer
+ - go to localhost:8000 in your browser
