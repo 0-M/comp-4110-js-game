@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Phaser - Making your first game, part 2</title>
+	<script type="text/javascript" src="../js/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+var sprite;
+var sprite_X=400, sprite_Y=400;
+var delta_X = delta_Y=5;
+var move_complete = true;
+
+function preload() {
+
+    game.load.image('sky', 'assets/sky.png');
+    game.load.image('ground', 'assets/platform.png');
+    game.load.image('star', 'assets/star.png');
+    game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+}
+
+function create() {
+
+	//  This will run in Canvas mode, so let's gain a little speed and display
+  game.renderer.clearBeforeRender = false;
+  game.renderer.roundPixels = true;
+
+	sprite = game.add.sprite(sprite_X, sprite_Y, 'dude');
+
+  //  Game input
+  cursors = game.input.keyboard.createCursorKeys();
+
+
+}
+
+function update() {
+	if (cursors.up.isDown) {
+  	sprite.y -= delta_Y;
+  }
+	if (cursors.down.isDown) {
+  	sprite.y += delta_Y;
+  }
+	if (cursors.left.isDown) {
+  	sprite.x -= delta_X;
+  }
+	if (cursors.right.isDown) {
+  	sprite.x += delta_X;
+  }
+}
+
+</script>
+
+</body>
+</html>
