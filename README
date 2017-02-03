@@ -2,6 +2,12 @@ This game will probably use phaser or some other JS engine
 
 
 to test movement example (requires python on your system):
- - cd this-repo/movement
+ - cd this-repo/
  - python -m SimpleHTTPServer
- - go to localhost:8000 in your browser
+ - go to localhost:8000/movement in your browser
+
+
+ to test knight example (requires python on your system):
+  - cd this-repo/
+  - python -m SimpleHTTPServer
+  - go to localhost:8000/knight_player in your browser

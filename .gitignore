@@ -1,3 +1,6 @@
 dev/scripts/node_modules
 public/app.js
 public/*.map
+**/*.png~
+**/*.kra~
+**/*-autosave.kra
