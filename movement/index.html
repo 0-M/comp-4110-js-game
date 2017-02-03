@@ -22,18 +22,14 @@ var delta_X = delta_Y=5;
 var move_complete = true;
 
 function preload() {
-
-    game.load.image('sky', 'assets/sky.png');
-    game.load.image('ground', 'assets/platform.png');
-    game.load.image('star', 'assets/star.png');
     game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
 }
 
 function create() {
 
 	//  This will run in Canvas mode, so let's gain a little speed and display
-  game.renderer.clearBeforeRender = false;
-  game.renderer.roundPixels = true;
+  //game.renderer.clearBeforeRender = false;
+  //game.renderer.roundPixels = true;
 
 	sprite = game.add.sprite(sprite_X, sprite_Y, 'dude');
 

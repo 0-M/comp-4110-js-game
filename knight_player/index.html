@@ -22,11 +22,8 @@ var delta_X = delta_Y=55;
 var animating = false;
 
 function preload() {
-
-    game.load.image('sky', 'assets/sky.png');
-    game.load.image('ground', 'assets/platform.png');
-    game.load.image('star', 'assets/star.png');
     game.load.spritesheet('knight', 'assets/knighter.png', 32, 48);
+		game.load.image('grass', 'assets/grass.png');
 }
 
 function create() {
@@ -34,17 +31,27 @@ function create() {
 	//  This will run in Canvas mode, so let's gain a little speed and display
   game.renderer.clearBeforeRender = false;
   game.renderer.roundPixels = true;
+	game.antialias = false;
 
+	tilesprite = game.add.tileSprite(0, 0, 800, 600, 'grass');
+	tilesprite.scale.x = 4;
+	tilesprite.scale.y = 4;
+	tilesprite.smoothed = false;
+	// set up player sprite
 	sprite = game.add.sprite(sprite_X, sprite_Y, 'knight');
 	sprite.scale.x = 2;
 	sprite.scale.y = 2;
+	sprite.smoothed = false;
+
+	// player animations
 	var walkLeft = sprite.animations.add('leftwalk', [0,1,2,3]);
 	var walkRight = sprite.animations.add('rightwalk', [4,5,6,7]);
 	var walkDown = sprite.animations.add('downwalk', [8,9,10,11,12,13]);
-//	var walk = mummy.animations.add('upwalk');
+
+	// background
+
   //  Game input
   cursors = game.input.keyboard.createCursorKeys();
-
 }
 
 function finishAnimating() {
