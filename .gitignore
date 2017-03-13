@@ -4,3 +4,5 @@ public/*.map
 **/*.png~
 **/*.kra~
 **/*-autosave.kra
+**/node_modules
+prototype/dist

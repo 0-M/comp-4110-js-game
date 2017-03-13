@@ -1,0 +1,8 @@
+
+How to build:
+- make sure NPM is installed (try "npm -v")
+- cd to this directory (.../comp-4110-js-game/prototype)
+- run "npm install"
+
+How to play:
+- open browser, go to localhost:3000 
