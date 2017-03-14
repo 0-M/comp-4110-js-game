@@ -4,7 +4,7 @@
   <image source="../maps/tilesets/columns.png" width="288" height="48"/>
  </tileset>
  <tileset firstgid="7" name="util_tiles" tilewidth="48" tileheight="48" tilecount="5" columns="5">
-  <image source="../images/util_tiles.png" width="240" height="48"/>
+  <image source="../maps/tilesets/util.png" width="240" height="48"/>
  </tileset>
  <layer name="Ground" width="16" height="10">
   <data encoding="csv">

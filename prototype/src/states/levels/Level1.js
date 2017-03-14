@@ -1,5 +1,7 @@
 import Phaser from 'phaser'
 import Player from '../../sprites/Player'
+import { health } from '../../ui/health'
+import { levelXP } from '../../ui/levelXP'
 
 export default class extends Phaser.State {
   init () {
@@ -13,6 +15,8 @@ export default class extends Phaser.State {
   create () {
     this.tileWidth = 48
     this.setupTileMap()
+    health.addHealthToLevel(this)
+    levelXP.addXPToLevel(this)
     this.physics.startSystem(Phaser.Physics.ARCADE)
   }
 
@@ -51,7 +55,6 @@ export default class extends Phaser.State {
   // we will have to initialize our player here
   // so it's sprite will show between the base and foreground tiles
     this.initPlayer()
-    this.initBanner()
   // creating the foreground layer last after all moving sprites
   // ensures that this layer will stay above during depth sorting
     // map.createLayer('Foreground')
@@ -60,19 +63,6 @@ export default class extends Phaser.State {
   // we will be using this one during update to check if our player has moved into the exit area
     let exit = this.map.objects.metadata.find(o => o.name === 'exit')
     this.exitRect = new Phaser.Rectangle(exit.x, exit.y, exit.width, exit.height)
-  }
-
-  initBanner () {
-    const bannerText = '0 points'
-    let banner = this.add.text(this.world.centerX, this.game.height - 80, bannerText)
-    banner.font = 'Bangers'
-    banner.padding.set(10, 16)
-    banner.fontSize = 40
-    banner.fill = '#FFFFFF'
-    banner.smoothed = false
-    banner.anchor.setTo(0.5)
-    this.banner = banner
-    this.points = 0
   }
 
   initPlayer () {
