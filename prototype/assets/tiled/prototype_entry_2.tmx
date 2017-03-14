@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="left-down" width="16" height="10" tilewidth="48" tileheight="48" nextobjectid="2">
+ <tileset firstgid="1" name="columns_combined" tilewidth="48" tileheight="48" tilecount="6" columns="6">
+  <image source="../maps/tilesets/columns.png" width="288" height="48"/>
+ </tileset>
+ <tileset firstgid="7" name="util_tiles" tilewidth="48" tileheight="48" tilecount="5" columns="5">
+  <image source="../images/util_tiles.png" width="240" height="48"/>
+ </tileset>
+ <layer name="Ground" width="16" height="10">
+  <data encoding="csv">
+7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
+7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
+7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
+7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
+7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
+7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
+7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
+7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
+7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
+7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
+</data>
+ </layer>
+ <layer name="Columns" width="16" height="10">
+  <data encoding="csv">
+5,2,3,3,3,3,3,3,3,3,3,3,3,3,1,5,
+4,0,0,0,0,0,0,0,0,0,0,5,0,0,0,4,
+4,0,0,0,0,0,0,2,3,1,0,4,0,5,0,4,
+6,0,0,0,0,0,0,5,0,0,0,6,0,4,0,4,
+0,0,0,0,0,0,0,4,0,2,3,1,0,4,0,4,
+5,0,0,0,0,0,0,4,0,0,0,0,0,4,0,4,
+4,0,0,0,0,0,0,4,0,0,0,0,0,4,0,4,
+4,0,0,0,0,0,0,6,2,3,3,3,1,6,0,4,
+4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,
+6,2,3,3,3,3,3,3,3,3,3,3,3,3,1,6
+</data>
+ </layer>
+ <layer name="Collision" width="16" height="10">
+  <data encoding="csv">
+8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
+8,0,0,0,0,0,0,0,0,0,0,8,0,0,0,8,
+8,0,0,0,0,0,0,8,8,8,0,8,0,8,0,8,
+8,0,0,0,0,0,0,8,0,0,0,8,0,8,0,8,
+0,0,0,0,0,0,0,8,0,8,8,8,0,8,0,8,
+8,0,0,0,0,0,0,8,0,0,0,0,0,8,0,8,
+8,0,0,0,0,0,0,8,0,0,0,0,0,8,0,8,
+8,0,0,0,0,0,0,8,8,8,8,8,8,8,0,8,
+8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,
+8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8
+</data>
+ </layer>
+ <objectgroup name="metadata">
+  <object id="1" name="entrance" x="0" y="192" width="10" height="48"/>
+ </objectgroup>
+</map>

@@ -8,30 +8,34 @@ export default class extends Phaser.Sprite {
     this.animating = false
     this.tileX = tileX
     this.tileY = tileY
+    this.x = tileX * game.tileWidth
+    this.y = tileY * game.tileWidth
     game.physics.enable(this, Phaser.Physics.ARCADE)
     game.camera.follow(this)
   }
 
   update () {
-    var dx = 0
-    var dy = 0
-    if (!this.animating) {
-      if (this.cursors.up.isDown) {
-        dy -= 1
+    /* var dx = 0
+    var dy = 0 */
+    this.body.velocity.x = 0
+    this.body.velocity.y = 0
+
+    if (this.cursors.up.isDown) {
+      this.body.velocity.y = -100
         // this.animateWalkingDown()
-      }
-      if (this.cursors.down.isDown) {
-        dy += 1
+    }
+    if (this.cursors.down.isDown) {
+      this.body.velocity.y = 100
         // this.animateWalkingDown()
-      }
-      if (this.cursors.left.isDown) {
-        dx -= 1
+    }
+    if (this.cursors.left.isDown) {
+      this.body.velocity.x = -100
         // this.animateWalkingLeft()
-      }
-      if (this.cursors.right.isDown) {
-        dx += 1
+    }
+    if (this.cursors.right.isDown) {
+      this.body.velocity.x = 100
         // this.animateWalkingRight()
-      }
+    } /*
       if ((dx !== 0) || (dy !== 0)) {
         this.animating = true
         this.tileX += dx
@@ -47,11 +51,6 @@ export default class extends Phaser.Sprite {
         )
         this.currentTween.onComplete.addOnce(this.finishAnimating, this)
       }
-    }
-  }
-
-  finishAnimating () {
-    this.animating = false
-    this.animations.stop(this.animations.currentAnim, true)
+    } */
   }
 }

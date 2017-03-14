@@ -13,6 +13,9 @@ export default class extends Phaser.Sprite {
     this.game.points += 1
     this.game.banner.text = 'Prototype Game\n' + this.game.points + ' points'
     console.log('collected')
+    if (this.game.points >= 5) {
+      this.game.state.start('Level1')
+    }
     this.destroy()
   }
 
