@@ -37,24 +37,23 @@ export default class extends Phaser.State {
     map.createLayer('Columns')
 
   // next create the collision layer
-    let collisionLayer = map.createLayer('Collision')
-    this.collisionLayer = collisionLayer
+    this.collisionLayer = map.createLayer('Collision')
 
   // we don't want the collision layer to be visible
-    collisionLayer.visible = false
+    this.collisionLayer.visible = false
 
   // inform phaser that our collision layer is our collision tiles
   // in our case, since we separated out the collision tiles into its own layer
   // we pass an empty array and passing in true to enable collision
-    this.physics.arcade.enable(collisionLayer)
     map.setCollisionByExclusion([], true, this.collisionLayer)
 
   //  This resizes the game world to match the layer dimensions
-    collisionLayer.resizeWorld()
+    this.collisionLayer.resizeWorld()
 
   // we will have to initialize our player here
   // so it's sprite will show between the base and foreground tiles
     this.initPlayer()
+
   // creating the foreground layer last after all moving sprites
   // ensures that this layer will stay above during depth sorting
     // map.createLayer('Foreground')
@@ -78,7 +77,11 @@ export default class extends Phaser.State {
   }
 
   render () {
-    this.game.physics.arcade.collide(this.player, this.collisionLayer)
+    // useless time-waster right here... physics MUST be called in update ()
+  }
+
+  update () {
+    this.physics.arcade.collide(this.player, this.collisionLayer)
 
     if (Phaser.Rectangle.containsPoint(this.exitRect, this.player.position)) {
       this.resetPlayer()
