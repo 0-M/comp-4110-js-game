@@ -25,7 +25,7 @@ export default class extends Phaser.State {
   }
 
   create () {
-    const bannerText = 'Prototype Game'
+    const bannerText = 'Prototype 87 Game'
     let banner = this.add.text(this.world.centerX, this.game.height - 80, bannerText)
     banner.font = 'Bangers'
     banner.padding.set(10, 16)
