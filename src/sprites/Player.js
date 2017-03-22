@@ -10,7 +10,7 @@ export default class extends Phaser.Sprite {
     this.tileY = tileY
     this.x = tileX * game.tileWidth
     this.y = tileY * game.tileWidth
-    game.physics.enable(this, Phaser.Physics.ARCADE)
+    game.physics.arcade.enable(this)
     game.camera.follow(this)
   }
 
