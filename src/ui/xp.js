@@ -1,6 +1,6 @@
 import config from '../config'
 
-class LevelXP {
+class XP {
   constructor () {
     this.XP = 5
     this.XPToNextLevel = 20
@@ -23,6 +23,11 @@ class LevelXP {
 
     this.text.setTextBounds(config.padding, config.padding, game.width - config.padding, game.height - config.padding)
   }
+
+  increaseBy (inxp) {
+    this.XP += inxp
+    this.text.text = 'XP: ' + this.XP + ' / ' + this.XPToNextLevel + '\nLevel ' + this.level
+  }
 }
 
-export let levelXP = new LevelXP() // singleton
+export let xp = new XP() // singleton

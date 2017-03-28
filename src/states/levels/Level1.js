@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
 import Player from '../../sprites/Player'
 import { health } from '../../ui/health'
-import { levelXP } from '../../ui/levelXP'
+import { xp } from '../../ui/XP'
 
 export default class extends Phaser.State {
   init () {
@@ -16,7 +16,7 @@ export default class extends Phaser.State {
     this.tileWidth = 48
     this.setupTileMap()
     health.addHealthToLevel(this)
-    levelXP.addXPToLevel(this)
+    xp.addXPToLevel(this)
     this.game.physics.startSystem(Phaser.Physics.ARCADE)
   }
 
@@ -89,6 +89,7 @@ export default class extends Phaser.State {
   }
 
   resetPlayer () {
+    xp.increaseBy(1)
     this.player.tileX = 2
     this.player.tileY = 4
     this.player.position.set(this.player.tileX * this.tileWidth, this.player.tileY * this.tileWidth)
