@@ -1,8 +1,8 @@
 import Phaser from 'phaser'
 
 export default class extends Phaser.Sprite {
-  constructor ({game, x, y, asset, tileX, tileY, player}) {
-    super(game, tileX * game.tileWidth, tileY * game.tileWidth, asset)
+  constructor ({game, x, y, asset, player}) {
+    super(game, x, y, asset)
     this.anchor.setTo(0.5)
     game.physics.enable(this, Phaser.Physics.ARCADE)
     this.body.onCollide = new Phaser.Signal()

@@ -12,12 +12,10 @@ export default class extends Phaser.State {
     var self = this
     locations.forEach(function (i) {
       var pizza = new Pizza({
-        game: self,
-        x: self.world.centerX,
-        y: self.world.centerY,
+        game: self.game,
+        x: i * self.tileWidth,
+        y: i * self.tileWidth,
         asset: 'pizza',
-        tileX: i,
-        tileY: i,
         player: self.player
       })
       self.add.existing(pizza)
@@ -33,31 +31,29 @@ export default class extends Phaser.State {
     banner.fill = '#555555'
     banner.smoothed = false
     banner.anchor.setTo(0.5)
-    this.banner = banner
-    this.points = 0
+    this.game.banner = banner
+    this.game.points = 0
 
     this.tileWidth = 64
     // this.world.setBounds(0, 0, 4800, 4800)
 
-    this.physics.startSystem(Phaser.Physics.ARCADE)
+    this.game.physics.startSystem(Phaser.Physics.ARCADE)
 
-    this.player = new Player({
-      game: this,
-      x: this.world.centerX,
-      y: this.world.centerY,
-      asset: 'player_sprite',
-      tileX: 6,
-      tileY: 4
+    this.game.player = new Player({
+      game: this.game,
+      x: this.game.world.centerX,
+      y: this.game.world.centerY,
+      asset: 'player_sprite'
     })
 
-    this.game.add.existing(this.player)
+    this.game.add.existing(this.game.player)
 
     this.generateItems()
   }
 
   render () {
     if (__DEV__) {
-      this.game.debug.spriteInfo(this.player, 32, 32)
+      this.game.debug.spriteInfo(this.game.player, 32, 32)
     }
   }
 }

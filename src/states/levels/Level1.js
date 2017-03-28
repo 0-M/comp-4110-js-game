@@ -17,7 +17,7 @@ export default class extends Phaser.State {
     this.setupTileMap()
     health.addHealthToLevel(this)
     levelXP.addXPToLevel(this)
-    this.physics.startSystem(Phaser.Physics.ARCADE)
+    this.game.physics.startSystem(Phaser.Physics.ARCADE)
   }
 
   setupTileMap () {
@@ -66,7 +66,7 @@ export default class extends Phaser.State {
 
   initPlayer () {
     this.player = new Player({
-      game: this,
+      game: this.game,
       x: this.world.centerX,
       y: this.world.centerY,
       asset: 'player_sprite',
@@ -81,7 +81,7 @@ export default class extends Phaser.State {
   }
 
   update () {
-    this.physics.arcade.collide(this.player, this.collisionLayer)
+    this.game.physics.arcade.collide(this.player, this.collisionLayer)
 
     if (Phaser.Rectangle.containsPoint(this.exitRect, this.player.position)) {
       this.resetPlayer()
