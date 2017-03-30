@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Phaser - Making your first game, part 2</title>
+	<script type="text/javascript" src="../js/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+var sprite;
+var wall;
+var sprite_X=400, sprite_Y=400;
+var delta_X = delta_Y=150;
+var animating = false;
+
+function preload() {
+  game.load.spritesheet('knight', 'assets/knighter.png', 32, 48);
+  game.load.image('grass', 'assets/grass.png');
+  game.load.image('wall', 'assets/platform.png');
+  /*Physics init*/
+  game.physics.startSystem(Phaser.Physics.ARCADE);
+}
+
+function create() {
+
+  //  This will run in Canvas mode, so let's gain a little speed and display
+  game.renderer.clearBeforeRender = false;
+  game.renderer.roundPixels = true;
+  game.antialias = false;
+
+  tilesprite = game.add.tileSprite(0, 0, 800, 600, 'grass');
+  tilesprite.scale.x = 4;
+  tilesprite.scale.y = 4;
+  tilesprite.smoothed = false;
+  // set up player sprite
+  sprite = game.add.sprite(sprite_X, sprite_Y, 'knight');
+  sprite.scale.x = 2;
+  sprite.scale.y = 2;
+  sprite.smoothed = false;
+  game.physics.enable(sprite);
+  sprite.body.collideWorldBounds = true;
+  sprite.body.velocity.x = 0;
+  sprite.body.velocity.y = 0;
+  /*Setup wall*/
+  wall = game.add.sprite(200, 200, 'wall');
+  game.physics.arcade.enable(wall);
+  wall.body.collideWorldBounds = true;
+  wall.body.immovable = true;
+  // player animations
+  var walkLeft = sprite.animations.add('leftwalk', [0,1,2,3]);
+  var walkRight = sprite.animations.add('rightwalk', [4,5,6,7]);
+  var walkDown = sprite.animations.add('downwalk', [8,9,10,11,12,13]);
+
+  // background
+
+  //  Game input
+  cursors = game.input.keyboard.createCursorKeys();
+}
+
+function finishAnimating() {
+	animating = false;
+	sprite.animations.stop(sprite.animations.currentAnim, true);
+}
+
+function update() {
+
+  if ((cursors.up.isDown) && (animating === false)) {
+    animating = true;
+    tweenRight = game.add.tween(sprite.body.velocity).to({ y: -delta_Y }, 500, Phaser.Easing.Linear.None, true);
+    sprite.animations.play('downwalk', 12, true);
+    tweenRight.onComplete.addOnce(finishAnimating, this);
+  }
+  if ((cursors.down.isDown) && (animating === false)) {
+    animating = true;
+    tweenRight = game.add.tween(sprite.body.velocity).to({ y: delta_Y }, 500, Phaser.Easing.Linear.None, true);
+    sprite.animations.play('downwalk', 12, true);
+    tweenRight.onComplete.addOnce(finishAnimating, this);
+  }
+  if ((cursors.left.isDown) && (animating === false)) {
+    animating = true;
+    tweenRight = game.add.tween(sprite.body.velocity).to({ x: -delta_X }, 500, Phaser.Easing.Linear.None, true);
+    sprite.animations.play('leftwalk', 8, true);
+    tweenRight.onComplete.addOnce(finishAnimating, this);
+  }
+  if ((cursors.right.isDown) && (animating === false)) {
+    animating = true;
+    tweenRight = game.add.tween(sprite.body.velocity).to({ x: delta_X }, 500, Phaser.Easing.Linear.None, true);
+    sprite.animations.play('rightwalk', 8, true);
+    tweenRight.onComplete.addOnce(finishAnimating, this);
+  }
+  if (!(cursors.up.isDown) && !(cursors.down.isDown)
+        && !(cursors.left.isDown) && !(cursors.right.isDown)){
+    sprite.body.velocity.x = 0;
+    sprite.body.velocity.y = 0;
+  }
+  if (!(cursors.up.isDown) && !(cursors.down.isDown)){
+    sprite.body.velocity.y = 0;
+  }
+  if (!(cursors.left.isDown) && !(cursors.right.isDown)){
+    sprite.body.velocity.x = 0;
+  }
+  game.physics.arcade.collide(wall, sprite);
+}
+
+</script>
+
+</body>
+</html>
