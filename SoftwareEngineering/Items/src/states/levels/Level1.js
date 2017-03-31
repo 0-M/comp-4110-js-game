@@ -64,11 +64,17 @@ export default class extends Phaser.State {
 
   // pull the exit area from the object layer
   // we will be using this one during update to check if our player has moved into the exit area
-//    let exit_1 = this.map.objects.metadata.find(o => o.name === 'exit')
-//    this.exitRect = new Phaser.Rectangle(exit_1.x, exit_1.y, exit_1.width, exit_1.height)
+    let exit_1 = this.map.objects.metadata.find(o => o.name === 'exit_1')
+    this.exitRect_1 = new Phaser.Rectangle(exit_1.x, exit_1.y, exit_1.width, exit_1.height)
+
+    let exit_2 = this.map.objects.metadata.find(o => o.name === 'exit_2')
+    this.exitRect_2 = new Phaser.Rectangle(exit_2.x, exit_2.y, exit_2.width, exit_2.height)
 
     //let exit_2 = this.map.objects.metadata.find(o => o.name === 'exit_2')
   //  this.exitRect = new Phaser.Rectangle(exit.x, exit.y, exit.width, exit.height)
+
+//  let exit = this.map.objects.metadata.find(o => o.name === 'exit')
+//this.exitRect = new Phaser.Rectangle(exit.x, exit.y, exit.width, exit.height)
   }
 
   initPlayer () {
@@ -90,15 +96,31 @@ export default class extends Phaser.State {
   update () {
     this.game.physics.arcade.collide(this.player, this.collisionLayer)
 
-  //  if (Phaser.Rectangle.containsPoint(this.exitRect, this.player.position)) {
-    //  this.resetPlayer()
-  //  }
+    if (Phaser.Rectangle.containsPoint(this.exitRect_1, this.player.position)) {
+         this.resetPlayer()
+       }
+
+    if (Phaser.Rectangle.containsPoint(this.exitRect_2, this.player.position)) {
+          this.resetPlayer()
+       }
+
+    //   if (Phaser.Rectangle.containsPoint(this.exitRect_2, this.player.position)) {
+    //        this.resetPlayer()
+      //    }
+
+    // if (Phaser.Rectangle.containsPoint(this.exitRect, this.player.position)) {
+    //   this.resetPlayer()
+    // }
+    //
+    // if (Phaser.Rectangle.containsPoint(this.exitRect_2, this.player.position)) {
+    //   this.resetPlayer()
+    // }
   }
 
   resetPlayer () {
     xp.increaseBy(1)
-    this.player.tileX = 2
-    this.player.tileY = 4
+    this.player.tileX = 8
+    this.player.tileY = 4.5
     this.player.position.set(this.player.tileX * this.tileWidth, this.player.tileY * this.tileWidth)
   }
 }

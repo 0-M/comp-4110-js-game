@@ -6,7 +6,7 @@
          "name":"Ground",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -40,7 +40,7 @@
          "name":"Columns",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -51,12 +51,12 @@
          "name":"Collision",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
         }],
- "nextobjectid":5,
+ "nextobjectid":8,
  "orientation":"orthogonal",
  "renderorder":"left-down",
  "tileheight":48,
