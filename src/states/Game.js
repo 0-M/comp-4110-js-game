@@ -5,7 +5,11 @@ import Pizza from '../sprites/Pizza'
 
 export default class extends Phaser.State {
   init () {}
-  preload () {}
+  
+  preload () {
+      this.game.load.image("background", "../../assets/images/menu_bg.png")
+      this.game.load.image("newgame", "../../assets/images/menu_new.png")
+  }
 
   generateItems () {
     var locations = [1, 2, 3, 4, 5]
@@ -23,6 +27,8 @@ export default class extends Phaser.State {
   }
 
   create () {
+    
+    /*
     const bannerText = 'Prototype 87 Game'
     let banner = this.add.text(this.world.centerX, this.game.height - 80, bannerText)
     banner.font = 'Bangers'
@@ -33,7 +39,12 @@ export default class extends Phaser.State {
     banner.anchor.setTo(0.5)
     this.game.banner = banner
     this.game.points = 0
-
+    */
+    
+    // The stuff before here is behind the background, and wont be seen
+    this.game.add.tileSprite(0,0,800,600, "background")
+    var newgame = this.game.add.button(this.game,350, 300, "newgame", actionOnClick, this)
+    
     this.tileWidth = 64
     // this.world.setBounds(0, 0, 4800, 4800)
 
@@ -47,13 +58,19 @@ export default class extends Phaser.State {
     })
 
     this.game.add.existing(this.game.player)
-
-    this.generateItems()
+    
+    // uncomment to show pizza
+    //this.generateItems()
   }
 
   render () {
+    /*
     if (__DEV__) {
       this.game.debug.spriteInfo(this.game.player, 32, 32)
     }
+    */
+  }
+  actionOnClick(){
+      this.game.state.start('Level1')
   }
 }
