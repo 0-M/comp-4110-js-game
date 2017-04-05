@@ -43,7 +43,7 @@ export default class extends Phaser.State {
     
     // The stuff before here is behind the background, and wont be seen
     this.game.add.tileSprite(0,0,800,600, "background")
-    var newgame = this.game.add.button(this.game,350, 300, "newgame", actionOnClick, this)
+    var newgame = this.game.add.button(350, 300, "newgame", this.actionOnClick, this,0,0,0)
     
     this.tileWidth = 64
     // this.world.setBounds(0, 0, 4800, 4800)
@@ -52,7 +52,7 @@ export default class extends Phaser.State {
 
     this.game.player = new Player({
       game: this.game,
-      x: this.game.world.centerX,
+      x: this.game.world.centerX + 200,
       y: this.game.world.centerY,
       asset: 'player_sprite'
     })
