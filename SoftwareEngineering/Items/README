@@ -1,8 +1,3 @@
-To-do:
--  Make prettier (WIP)
--  Diagonal animation (Not Started)
--  Items (Not Started)
-
 
 How to build:
 - make sure NPM is installed (try "npm -v")

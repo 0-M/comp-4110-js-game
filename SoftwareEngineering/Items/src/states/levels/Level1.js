@@ -70,6 +70,18 @@ export default class extends Phaser.State {
     let exit_2 = this.map.objects.metadata.find(o => o.name === 'exit_2')
     this.exitRect_2 = new Phaser.Rectangle(exit_2.x, exit_2.y, exit_2.width, exit_2.height)
 
+    let fence_1 = this.map.objects.metadata.find(o => o.name === 'fence_1')
+    this.fenceRect_1 = new Phaser.Rectangle(fence_1.x, fence_1.y, fence_1.width, fence_1.height)
+
+    let fence_2 = this.map.objects.metadata.find(o => o.name === 'fence_2')
+    this.fenceRect_2 = new Phaser.Rectangle(fence_2.x, fence_2.y, fence_2.width, fence_2.height)
+
+    let fence_3 = this.map.objects.metadata.find(o => o.name === 'fence_3')
+    this.fenceRect_3 = new Phaser.Rectangle(fence_3.x, fence_3.y, fence_3.width, fence_3.height)
+
+    let fence_4 = this.map.objects.metadata.find(o => o.name === 'fence_4')
+    this.fenceRect_4 = new Phaser.Rectangle(fence_4.x, fence_4.y, fence_4.width, fence_4.height)
+
     //let exit_2 = this.map.objects.metadata.find(o => o.name === 'exit_2')
   //  this.exitRect = new Phaser.Rectangle(exit.x, exit.y, exit.width, exit.height)
 
@@ -104,17 +116,10 @@ export default class extends Phaser.State {
           this.resetPlayer()
        }
 
-    //   if (Phaser.Rectangle.containsPoint(this.exitRect_2, this.player.position)) {
-    //        this.resetPlayer()
-      //    }
+    if (Phaser.Rectangle.containsPoint(this.fenceRect_1, this.player.position)) {
+             this.player.can_move = false
+          }
 
-    // if (Phaser.Rectangle.containsPoint(this.exitRect, this.player.position)) {
-    //   this.resetPlayer()
-    // }
-    //
-    // if (Phaser.Rectangle.containsPoint(this.exitRect_2, this.player.position)) {
-    //   this.resetPlayer()
-    // }
   }
 
   resetPlayer () {
@@ -122,5 +127,9 @@ export default class extends Phaser.State {
     this.player.tileX = 8
     this.player.tileY = 4.5
     this.player.position.set(this.player.tileX * this.tileWidth, this.player.tileY * this.tileWidth)
+  }
+  stopPlayer () {
+    this.player.velocity.x = 0
+    this.player.velocity.y = 0
   }
 }
