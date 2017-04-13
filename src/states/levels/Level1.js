@@ -1,17 +1,16 @@
 import Phaser from 'phaser'
 import Player from '../../sprites/Player'
 import { health } from '../../ui/health'
-import { xp } from '../../ui/xp'
-import { pause } from '../../ui/pause'
+import { xp } from '../../ui/XP'
 
 export default class extends Phaser.State {
   init () {
   }
   preload () {
-    this.load.tilemap('level1map', 'assets/maps/prototype_entry.json', null, Phaser.Tilemap.TILED_JSON)
-    this.load.image('pizza', 'assets/images/pizza-1.png')
-    this.load.image('columns_set', 'assets/maps/tilesets/columns.png')
-    this.load.image('util_set', 'assets/maps/tilesets/util.png')
+    this.load.tilemap('level1map', 'assets/maps/entry_pretty.json', null, Phaser.Tilemap.TILED_JSON)
+    // this.load.image('pizza', 'assets/images/pizza-1.png')
+    // this.load.image('columns_set', 'assets/maps/tilesets/columns.png')
+    this.load.image('tiles', 'assets/maps/tilesets/pretty.png')
   }
   create () {
     this.tileWidth = 48
@@ -19,8 +18,6 @@ export default class extends Phaser.State {
     health.addHealthToLevel(this)
     xp.addXPToLevel(this)
     this.game.physics.startSystem(Phaser.Physics.ARCADE)
-    var escKey = this.input.keyboard.addKey(Phaser.Keyboard.ESC)
-    escKey.onDown.add(this.togglePause, this)
   }
 
   setupTileMap () {
@@ -31,13 +28,17 @@ export default class extends Phaser.State {
 
   // The first parameter is the tileset name, as specified in the Tiled map editor (and in the tilemap json file)
   // The second parameter maps this name to the Phaser.Cache key 'tiles'
-    map.addTilesetImage('columns_combined', 'columns_set')
-    map.addTilesetImage('util_tiles', 'util_set')
+    //map.addTilesetImage('columns_combined', 'columns_set')
+  //  map.addTilesetImage('util_tiles', 'util_set')
+      map.addTilesetImage('pretty', 'tiles')
 
   // create the base layer, these are the floors, walls
   // and anything else we want behind any sprites
-    map.createLayer('Ground')
-    map.createLayer('Columns')
+    map.createLayer('Grass')
+    map.createLayer('Collision_tiles')
+
+    //map.createLayer('Collision_tiles')
+    //map.createLayer('Columns')
 
   // next create the collision layer
     this.collisionLayer = map.createLayer('Collision')
@@ -63,8 +64,29 @@ export default class extends Phaser.State {
 
   // pull the exit area from the object layer
   // we will be using this one during update to check if our player has moved into the exit area
-    let exit = this.map.objects.metadata.find(o => o.name === 'exit')
-    this.exitRect = new Phaser.Rectangle(exit.x, exit.y, exit.width, exit.height)
+    let exit_1 = this.map.objects.metadata.find(o => o.name === 'exit_1')
+    this.exitRect_1 = new Phaser.Rectangle(exit_1.x, exit_1.y, exit_1.width, exit_1.height)
+
+    let exit_2 = this.map.objects.metadata.find(o => o.name === 'exit_2')
+    this.exitRect_2 = new Phaser.Rectangle(exit_2.x, exit_2.y, exit_2.width, exit_2.height)
+
+    let fence_1 = this.map.objects.metadata.find(o => o.name === 'fence_1')
+    this.fenceRect_1 = new Phaser.Rectangle(fence_1.x, fence_1.y, fence_1.width, fence_1.height)
+
+    let fence_2 = this.map.objects.metadata.find(o => o.name === 'fence_2')
+    this.fenceRect_2 = new Phaser.Rectangle(fence_2.x, fence_2.y, fence_2.width, fence_2.height)
+
+    let fence_3 = this.map.objects.metadata.find(o => o.name === 'fence_3')
+    this.fenceRect_3 = new Phaser.Rectangle(fence_3.x, fence_3.y, fence_3.width, fence_3.height)
+
+    let fence_4 = this.map.objects.metadata.find(o => o.name === 'fence_4')
+    this.fenceRect_4 = new Phaser.Rectangle(fence_4.x, fence_4.y, fence_4.width, fence_4.height)
+
+    //let exit_2 = this.map.objects.metadata.find(o => o.name === 'exit_2')
+  //  this.exitRect = new Phaser.Rectangle(exit.x, exit.y, exit.width, exit.height)
+
+//  let exit = this.map.objects.metadata.find(o => o.name === 'exit')
+//this.exitRect = new Phaser.Rectangle(exit.x, exit.y, exit.width, exit.height)
   }
 
   initPlayer () {
@@ -78,16 +100,7 @@ export default class extends Phaser.State {
     })
     this.game.add.existing(this.player)
   }
-    
-  togglePause() {
-    this.game.physics.arcade.isPaused = (this.game.physics.arcade.isPaused) ? false : true;
-    if(this.game.physics.arcade.isPaused){
-      pause.displayPauseScreen(this.game)
-    }else{
-      pause.removePauseScreen(this.game)
-    }
-  }
-    
+
   render () {
     // useless time-waster right here... physics MUST be called in update ()
   }
@@ -95,15 +108,28 @@ export default class extends Phaser.State {
   update () {
     this.game.physics.arcade.collide(this.player, this.collisionLayer)
 
-    if (Phaser.Rectangle.containsPoint(this.exitRect, this.player.position)) {
-      this.resetPlayer()
-    }
+    if (Phaser.Rectangle.containsPoint(this.exitRect_1, this.player.position)) {
+         this.resetPlayer()
+       }
+
+    if (Phaser.Rectangle.containsPoint(this.exitRect_2, this.player.position)) {
+          this.resetPlayer()
+       }
+
+    if (Phaser.Rectangle.containsPoint(this.fenceRect_1, this.player.position)) {
+             this.player.can_move = false
+          }
+
   }
 
   resetPlayer () {
     xp.increaseBy(1)
-    this.player.tileX = 2
-    this.player.tileY = 4
+    this.player.tileX = 8
+    this.player.tileY = 4.5
     this.player.position.set(this.player.tileX * this.tileWidth, this.player.tileY * this.tileWidth)
+  }
+  stopPlayer () {
+    this.player.velocity.x = 0
+    this.player.velocity.y = 0
   }
 }
