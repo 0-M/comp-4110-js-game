@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import Player from '../../sprites/Player'
+import { pause } from '../../ui/Pause'
 import { health } from '../../ui/health'
 import { xp } from '../../ui/XP'
 
@@ -18,6 +19,8 @@ export default class extends Phaser.State {
     health.addHealthToLevel(this)
     xp.addXPToLevel(this)
     this.game.physics.startSystem(Phaser.Physics.ARCADE)
+    var escKey = this.input.keyboard.addKey(Phaser.Keyboard.P)
+    escKey.onDown.add(this.togglePause, this)
   }
 
   setupTileMap () {
@@ -100,6 +103,15 @@ export default class extends Phaser.State {
     })
     this.game.add.existing(this.player)
   }
+
+  togglePause() {
+  this.game.physics.arcade.isPaused = (this.game.physics.arcade.isPaused) ? false : true;
+  if(this.game.physics.arcade.isPaused){
+    pause.displayPauseScreen(this.game)
+  }else{
+    pause.removePauseScreen(this.game)
+  }
+}
 
   render () {
     // useless time-waster right here... physics MUST be called in update ()
