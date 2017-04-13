@@ -1,4 +1,0 @@
-Zachary Krausman and Daniel MacMillan
-
-
-We completed most of the project.  Everything reads in and out correctly, but something is wrong with our physics. We didn't figure out the problem until right before we had to turn it in.  The way we used to have it is that our planets would fly off the screen.  What we discovered is that we weren't updating the universe coordinates, so it was doing the same calculation every time it was doing the same tick over and over.  Currently nothing moves, because we were in the process of figuring out why the universe coordinates weren't updating and trying to fix that problem.  We also realized that our physics function wasn't working the way it was supposed to.  The way we were doing it we updated the velocity after each calculation between planets even though we were supposed to sum the forces and then update the velocity.

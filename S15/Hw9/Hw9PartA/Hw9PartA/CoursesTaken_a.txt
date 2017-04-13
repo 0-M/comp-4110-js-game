@@ -1,8 +1,0 @@
-FYSH
-College Writing I
-Economics I
-Calculus 1A
-Computing I
-Calculus 1B
-College Writing II
-Computing II
