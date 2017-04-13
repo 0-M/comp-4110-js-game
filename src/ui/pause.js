@@ -9,7 +9,7 @@ class PauseScreen{
       this.pauseText
     }
     displayPauseScreen( game ){
-      this.pauseText = game.add.text(game.width/2, game.height/2, this.pauseBanner, {font: "24px Bangers", fill: "#fff"})
+      this.pauseText = game.add.text(360, 215, this.pauseBanner, {font: "24px Bangers", fill: "#fff"})
       //pauseText.font = "24px Bangers"
       //pauseText.fill = "#fff"
     }
