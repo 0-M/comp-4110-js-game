@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1446519793 source:c:\users\zack\desktop\thatrepositorytho\computing 3\assignment4\shapeheirarchy\shape.cc
+	<iostream>
+	<cstdlib>
+	<vector>
+	<string>
+	<cmath>
+	<typeinfo>
+	"Shape.h"
+
+1446519976 c:\users\zack\desktop\thatrepositorytho\computing 3\assignment4\shapeheirarchy\shape.h
+	<iostream>
+	<cstdlib>
+	<vector>
+	<string>
+	<cmath>
+
+1446520020 source:c:\users\zack\desktop\thatrepositorytho\computing 3\assignment4\shapeheirarchy\shape_client.cc
+	<iostream>
+	<cstdlib>
+	<typeinfo>
+	"Shape.h"
+

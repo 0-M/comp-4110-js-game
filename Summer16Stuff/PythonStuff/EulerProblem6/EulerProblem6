@@ -1,0 +1,17 @@
+def sumSquares(number):
+    summed = 0
+    i = 0
+    while i < number + 1:
+        summed = summed + i**2
+        i += 1
+    return summed
+
+def squareSum(number):
+    summed = 0
+    i = 0
+    while i < number + 1:
+        summed = summed + i
+        i += 1
+    return summed**2
+
+print(squareSum(100) - sumSquares(100))

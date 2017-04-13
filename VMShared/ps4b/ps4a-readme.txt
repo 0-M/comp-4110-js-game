@@ -1,0 +1,55 @@
+/**********************************************************************
+ *  readme.txt template                                                   
+ *  Kronos PS4a startup
+ **********************************************************************/
+
+Name: Zachary Krausman
+
+
+Hours to complete assignment (optional): 4
+
+
+/**********************************************************************
+ *  Did you complete the whole assignment?
+ *  Successfully or not? 
+ *  Indicate which parts you think are working, and describe
+ *    how you know that they're working.
+ **********************************************************************/
+Yes
+
+
+/**********************************************************************
+ *  Copy here all regex's you created for parsing the file, 
+ *  and explain individually what each ones does.
+ **********************************************************************/
+"[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}:"
+  " \\(log.c.166\\) server started" -- This one finds all the booting lines
+
+"oejs.AbstractConnector:Started SelectChannelConnector" -- This one finds all the completing lines
+
+
+/**********************************************************************
+ *  Describe your overall approach for solving the problem.
+ *  100-200 words.
+ **********************************************************************/
+ I think the hardest part of the assignment was figuring out how to find whether or not the device booted.  So what I decided to do was to create a boolean and if you found a starting line the next time you went through at the beginning it would check for another starting line and for an ending line.  Depending on which it found first it would output something different, both would reset the boolean.
+
+
+/**********************************************************************
+ *  List whatever help (if any) you received from lab TAs,
+ *  classmates, or anyone else.
+ **********************************************************************/
+  None
+
+
+/**********************************************************************
+ *  Describe any serious problems you encountered.                    
+ **********************************************************************/
+ I had a little trouble with getting some of the date and time stuff to wrok as well as getting the regular expression to find the correct lines, but looking at the examples really helped.
+
+
+/**********************************************************************
+ *  List any other comments here.                                     
+ **********************************************************************/
+
+

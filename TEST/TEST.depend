@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1423433042 source:c:\users\zack\desktop\thatrepositorytho\semester2\assignment2\array.c
+	<stdio.h>
+	<stdlib.h>
+	"Array.h"
+
+1423360822 c:\users\zack\desktop\thatrepositorytho\semester2\assignment2\array.h
+
+1423433940 source:c:\users\zack\desktop\thatrepositorytho\semester2\assignment2\arraytest.c
+	<stdio.h>
+	<stdlib.h>
+	"Array.h"
+

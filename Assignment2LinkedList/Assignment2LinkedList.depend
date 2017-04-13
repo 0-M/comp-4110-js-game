@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1385316878 source:c:\users\zack\desktop\thatrepositorytho\assignment2linkedlist\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1423522691 source:c:\users\zack\desktop\thatrepositorytho\semester2\assignment2\linkedlist.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+
+1423455826 c:\users\zack\desktop\thatrepositorytho\semester2\assignment2\linkedlist.h
+
+1423522729 source:c:\users\zack\desktop\thatrepositorytho\semester2\assignment2\linkedlisttest.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+

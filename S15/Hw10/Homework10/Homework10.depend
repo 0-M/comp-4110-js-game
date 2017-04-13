@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1429565183 source:c:\users\zack\desktop\thatrepositorytho\semester2\hw10\homework10\hashtable.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"HashTable.h"
+
+1429563069 c:\users\zack\desktop\thatrepositorytho\semester2\hw10\homework10\hashtable.h
+
+1429565270 source:c:\users\zack\desktop\thatrepositorytho\semester2\hw10\homework10\test.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"HashTable.h"
+

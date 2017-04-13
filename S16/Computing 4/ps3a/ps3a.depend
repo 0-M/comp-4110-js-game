@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1457062278 source:c:\users\zack\desktop\thatrepositorytho\s16\computing 4\ps3a\ring_buffer_class.cpp
+	"ring_buffer_class.hpp"
+
+1457060015 source:c:\users\zack\desktop\thatrepositorytho\s16\computing 4\ps3a\ring_buffer_test.cpp
+	"ring_buffer_class.hpp"
+
+1457062990 c:\users\zack\desktop\thatrepositorytho\s16\computing 4\ps3a\ring_buffer_class.hpp
+	<stdexcept>
+	<iostream>
+	"ring_buffer_class.cpp"
+
+1457062278 c:\users\zack\desktop\thatrepositorytho\s16\computing 4\ps3a\ring_buffer_class.cpp
+	"ring_buffer_class.hpp"
+

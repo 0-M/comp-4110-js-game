@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1427319771 source:c:\users\zack\desktop\thatrepositorytho\semester2\hw7\assignment7\pqlinked.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"pq.h"
+
+1427319935 c:\users\zack\desktop\thatrepositorytho\semester2\hw7\assignment7\pq.h
+
+1427319959 source:c:\users\zack\desktop\thatrepositorytho\semester2\hw7\assignment7\assignmentlog.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"pq.h"
+
