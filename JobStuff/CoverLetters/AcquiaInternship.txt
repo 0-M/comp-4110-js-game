@@ -1,0 +1,8 @@
+Dear Sir or Madam:
+
+I was pleased to meet your representative at the job fair at the University of Massachusetts Lowell.  I'm seeking a three-month or six-month internship starting the summer of 2017 and am interested in the position of Security Engineering Intern.  A position at Acquia appeals to me because of my strong interest in cyber security.  I've been working with C++ for over two years and have experience with the Boost libraries.  I’ve had extensive experience with assembly and microcode and some exposure to Javascript and Python.
+
+I'm excited about working on software that will be delivered to customers, and believe that my skills and interests would be well utilized at your company.  I look forward to talking with you further about internship opportunities at Acquia.  Thank you for your consideration.
+ 
+Sincerely,
+Zachary Krausman
