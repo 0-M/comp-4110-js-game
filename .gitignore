@@ -1,0 +1,9 @@
+dev/scripts/node_modules
+public/app.js
+public/*.map
+**/*.png~
+**/*.kra~
+**/*-autosave.kra
+**/node_modules
+prototype/dist
+dist/
