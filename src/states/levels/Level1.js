@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 import Player from '../../sprites/Player'
 import { health } from '../../ui/health'
 import { xp } from '../../ui/XP'
+import { ClownBoss } from '../../sprites/ClownBoss'
 
 export default class extends Phaser.State {
   init () {
@@ -13,7 +14,7 @@ export default class extends Phaser.State {
     this.load.image('tiles', 'assets/maps/tilesets/pretty.png')
   }
   create () {
-    this.tileWidth = 48
+    this.game.tileWidth = this.tileWidth = 48
     this.setupTileMap()
     health.addHealthToLevel(this)
     xp.addXPToLevel(this)
@@ -28,20 +29,21 @@ export default class extends Phaser.State {
 
   // The first parameter is the tileset name, as specified in the Tiled map editor (and in the tilemap json file)
   // The second parameter maps this name to the Phaser.Cache key 'tiles'
-    //map.addTilesetImage('columns_combined', 'columns_set')
+  // map.addTilesetImage('columns_combined', 'columns_set')
   //  map.addTilesetImage('util_tiles', 'util_set')
-      map.addTilesetImage('pretty', 'tiles')
+    map.addTilesetImage('pretty', 'tiles')
 
   // create the base layer, these are the floors, walls
   // and anything else we want behind any sprites
     map.createLayer('Grass')
     map.createLayer('Collision_tiles')
 
-    //map.createLayer('Collision_tiles')
-    //map.createLayer('Columns')
+    // map.createLayer('Collision_tiles')
+    // map.createLayer('Columns')
 
   // next create the collision layer
     this.collisionLayer = map.createLayer('Collision')
+    this.game.collisionLayer = this.collisionLayer
 
   // we don't want the collision layer to be visible
     this.collisionLayer.visible = false
@@ -57,6 +59,9 @@ export default class extends Phaser.State {
   // we will have to initialize our player here
   // so it's sprite will show between the base and foreground tiles
     this.initPlayer()
+
+  // initialize enemy
+    this.initEnemy()
 
   // creating the foreground layer last after all moving sprites
   // ensures that this layer will stay above during depth sorting
@@ -82,15 +87,15 @@ export default class extends Phaser.State {
     let fence_4 = this.map.objects.metadata.find(o => o.name === 'fence_4')
     this.fenceRect_4 = new Phaser.Rectangle(fence_4.x, fence_4.y, fence_4.width, fence_4.height)
 
-    //let exit_2 = this.map.objects.metadata.find(o => o.name === 'exit_2')
+    // let exit_2 = this.map.objects.metadata.find(o => o.name === 'exit_2')
   //  this.exitRect = new Phaser.Rectangle(exit.x, exit.y, exit.width, exit.height)
 
 //  let exit = this.map.objects.metadata.find(o => o.name === 'exit')
-//this.exitRect = new Phaser.Rectangle(exit.x, exit.y, exit.width, exit.height)
+// this.exitRect = new Phaser.Rectangle(exit.x, exit.y, exit.width, exit.height)
   }
 
   initPlayer () {
-    this.player = new Player({
+    this.game.player = this.player = new Player({
       game: this.game,
       x: this.world.centerX,
       y: this.world.centerY,
@@ -109,17 +114,25 @@ export default class extends Phaser.State {
     this.game.physics.arcade.collide(this.player, this.collisionLayer)
 
     if (Phaser.Rectangle.containsPoint(this.exitRect_1, this.player.position)) {
-         this.resetPlayer()
-       }
+      this.resetPlayer()
+    }
 
     if (Phaser.Rectangle.containsPoint(this.exitRect_2, this.player.position)) {
-          this.resetPlayer()
-       }
+      this.resetPlayer()
+    }
 
     if (Phaser.Rectangle.containsPoint(this.fenceRect_1, this.player.position)) {
-             this.player.can_move = false
-          }
+      this.player.can_move = false
+    }
+  }
 
+  initEnemy () {
+    var enemies = []
+
+    var e = new ClownBoss(this.game, 5, 5, 5)
+    enemies.push(e)
+
+    this.enemies = enemies
   }
 
   resetPlayer () {

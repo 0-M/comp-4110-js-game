@@ -1,25 +1,45 @@
 import Phaser from 'phaser'
 import PF from 'pathfinding'
+import { getBlockableMap } from '../utils'
 
-export default class extends Phaser.Sprite {
-  constructor ({game, x, y, asset, tileX, tileY, player, difficulty}) {
+export class ClownBoss extends Phaser.Sprite {
+  constructor (game, asset, tileX, tileY, difficulty) {
     super(game, tileX * game.tileWidth, tileY * game.tileWidth, 'clownBoss')
+    game.add.existing(this)
     this.tileX = tileX
     this.tileY = tileY
+
+    this.difficulty = difficulty
+    this.health = 100 * difficulty
+
     this.setupPathFinding()
   }
 
   setupPathFinding () {
-    var coll = this.game.collisionLayer
-    var grid = new PF.Grid(coll.tiles)
+    var coll = this.game.collisionLayer.layer.data
+    var binaryMap = getBlockableMap(coll)
+    var grid = new PF.Grid(binaryMap)
     this.grid = grid.clone()
     this.finder = new PF.AStarFinder()
-    console.log('path to player: ' + this.finder.findPath(this.tileX, this.tileY, this.player.tileX, this.player.tileY, grid))
+    var playerTileX = Math.round(this.game.player.x / this.game.tileWidth)
+    var playerTileY = Math.round(this.game.player.y / this.game.tileWidth)
+    console.log('path to player: ' + this.finder.findPath(this.tileX, this.tileY, playerTileX, playerTileY, grid))
   }
 
   findPath () {
     var grid = this.grid
     this.grid = grid.clone()
-    console.log('path to player: ' + this.finder.findPath(this.tileX, this.tileY, this.player.tileX, this.player.tileY, grid))
+    var playerTileX = Math.round(this.game.player.x / this.game.tileWidth)
+    var playerTileY = Math.round(this.game.player.y / this.game.tileWidth)
+    var path = this.finder.findPath(this.tileX, this.tileY, playerTileX, playerTileY, grid)
+    console.log('path to player: ' + path)
+  }
+
+  moveUsingPath (path) {
+
+  }
+
+  update () {
+    this.findPath()
   }
 }

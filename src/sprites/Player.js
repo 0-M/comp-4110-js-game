@@ -4,7 +4,7 @@ export default class extends Phaser.Sprite {
   constructor ({game, x, y, asset}) {
     super(game, x, y, asset)
     this.anchor.setTo(0.5)
-    this.cursors = game.input.keyboard.addKeys( { 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'right': Phaser.KeyCode.D } );
+    this.cursors = game.input.keyboard.addKeys({ 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'right': Phaser.KeyCode.D })
     //this.cursors = game.input.keyboard.createCursorKeys()
     this.animating = false
     game.physics.arcade.enable(this)
