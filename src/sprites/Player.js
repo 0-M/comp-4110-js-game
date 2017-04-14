@@ -5,7 +5,7 @@ export default class extends Phaser.Sprite {
     super(game, x, y, asset)
     this.anchor.setTo(0.5)
     this.cursors = game.input.keyboard.addKeys({ 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'right': Phaser.KeyCode.D })
-    //this.cursors = game.input.keyboard.createCursorKeys()
+    // this.cursors = game.input.keyboard.createCursorKeys()
     this.animating = false
     game.physics.arcade.enable(this)
     game.camera.follow(this)
@@ -13,6 +13,7 @@ export default class extends Phaser.Sprite {
     this.animations.add('leftwalk', [4, 5, 6, 7])
     this.animations.add('rightwalk', [8, 9, 10, 11])
     this.animations.add('downwalk', [0, 1, 2, 3])
+    this.defense = 0
   }
 
   animateWalkingUp () {

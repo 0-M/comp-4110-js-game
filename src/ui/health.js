@@ -23,6 +23,11 @@ class Health {
 
     this.text.setTextBounds(config.padding, config.padding, game.width - config.padding, game.height - config.padding)
   }
+
+  updateHealth (newVal) {
+    this.value = Math.max(newVal, 0)
+    this.text.text = 'health: ' + this.value + ' / ' + this.maxHealth
+  }
 }
 
 export let health = new Health() // singleton
