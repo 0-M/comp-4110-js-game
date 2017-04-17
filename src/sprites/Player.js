@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import { Inventory } from '../../ui/inventory'
 
 var lastAnimation = 'down'
 
