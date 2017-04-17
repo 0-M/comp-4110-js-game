@@ -1,12 +1,10 @@
 import Phaser from 'phaser'
-import { Inventory } from '../../ui/inventory'
+import { Inventory } from '../ui/inventory'
 
 var lastAnimation = 'down'
 
 export default class extends Phaser.Sprite {
-
   constructor ({game, x, y, asset}) {
-
     super(game, x, y, asset)
     this.anchor.setTo(0.5)
     this.cursors = game.input.keyboard.addKeys({ 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'right': Phaser.KeyCode.D })
@@ -21,7 +19,6 @@ export default class extends Phaser.Sprite {
     this.defense = 0
   }
 
-
   animateWalkingUp () {
     this.animations.play('upwalk', 12, false)
   }
@@ -35,9 +32,7 @@ export default class extends Phaser.Sprite {
     this.animations.play('rightwalk', 12, false)
   }
 
-
   update () {
-
     this.body.velocity.x = 0
     this.body.velocity.y = 0
 
@@ -46,61 +41,47 @@ export default class extends Phaser.Sprite {
       this.body.velocity.x = 106
       this.animateWalkingUp()
       lastAnimation = 'up'
-    }
-    else if (this.cursors.up.isDown && this.cursors.left.isDown) {
+    }    else if (this.cursors.up.isDown && this.cursors.left.isDown) {
       this.body.velocity.y = -106
       this.body.velocity.x = -106
       this.animateWalkingUp()
       lastAnimation = 'up'
-    }
-    else if (this.cursors.down.isDown && this.cursors.right.isDown) {
+    }    else if (this.cursors.down.isDown && this.cursors.right.isDown) {
       this.body.velocity.y = 106
       this.body.velocity.x = 106
       this.animateWalkingDown()
       lastAnimation = 'down'
-    }
-    else if (this.cursors.down.isDown && this.cursors.left.isDown) {
+    }    else if (this.cursors.down.isDown && this.cursors.left.isDown) {
       this.body.velocity.y = 106
       this.body.velocity.x = -106
       this.animateWalkingDown()
       lastAnimation = 'down'
-    }
-    else if (this.cursors.up.isDown) {
+    }    else if (this.cursors.up.isDown) {
       this.body.velocity.y = -150
       this.animateWalkingUp()
       lastAnimation = 'up'
-    }
-    else if (this.cursors.down.isDown) {
+    }    else if (this.cursors.down.isDown) {
       this.body.velocity.y = 150
       this.animateWalkingDown()
       lastAnimation = 'down'
-    }
-    else if (this.cursors.left.isDown) {
+    }    else if (this.cursors.left.isDown) {
       this.body.velocity.x = -150
       this.animateWalkingLeft()
       lastAnimation = 'left'
-    }
-    else if (this.cursors.right.isDown) {
+    }    else if (this.cursors.right.isDown) {
       this.body.velocity.x = 150
       this.animateWalkingRight()
       lastAnimation = 'right'
-    }
-    else {
+    }    else {
       if (lastAnimation == 'up') {
         this.frame = 12
-      }
-      else if (lastAnimation == 'down') {
+      }      else if (lastAnimation == 'down') {
         this.frame = 0
-      }
-      else if (lastAnimation == 'left') {
+      }      else if (lastAnimation == 'left') {
         this.frame = 4
-      }
-      else if(lastAnimation == 'right') {
+      }      else if (lastAnimation == 'right') {
         this.frame = 8
       }
     }
-
   }
-
-
 }
