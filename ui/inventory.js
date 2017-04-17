@@ -1,8 +1,8 @@
 import Phaser from 'phaser'
-import Consumable from 'item'
-import Weapon from 'item'
-import Shield from 'item'
-import Item from 'item'
+import Consumable from './item'
+import Weapon from './item'
+import Shield from ./'item'
+import Item from './item'
 
 export Inventory class {
   constructor ({inven_size}) {
