@@ -12,6 +12,8 @@ export default class extends Phaser.Sprite {
     this.animating = false
     game.physics.arcade.enable(this)
     game.camera.follow(this)
+    var inv = new Inventory(5)
+    this.inv = inv
     this.animations.add('upwalk', [12, 13, 14, 15])
     this.animations.add('leftwalk', [4, 5, 6, 7])
     this.animations.add('rightwalk', [8, 9, 10, 11])
