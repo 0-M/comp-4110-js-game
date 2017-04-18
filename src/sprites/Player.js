@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import { Inventory } from '../ui/inventory'
+import { Weapon } from '../ui/item'
 
 var lastAnimation = 'down'
 
@@ -13,6 +14,12 @@ export default class extends Phaser.Sprite {
     game.physics.arcade.enable(this)
     game.camera.follow(this)
     var inv = new Inventory(5)
+    /*** Some ioeas
+      - When switching from inventory to active swap the x's and y's of the two items
+      - Items might need an is visible -> talk to dan about how pause menu works
+    ***/
+    //var worn_weapon = new Weapon(game, x, y, asset, player, itemId, stats_flat, stats_per, is_worn, two_handed)
+    //var worn_shield = new Shieldgame, x, y, asset, player, itemId, stats_flat, stats_per, is_worn, range)
     this.inv = inv
     this.animations.add('upwalk', [12, 13, 14, 15])
     this.animations.add('leftwalk', [4, 5, 6, 7])
