@@ -24,7 +24,7 @@ export class Enemy extends Phaser.Sprite {
     this.walkSpeed = 150
     this.walkAnimSpeed = 6    // Frames per second
 
-    this.attackAnimSpeed = 15 // Frames per second
+    this.attackAnimSpeed = 20 // Frames per second
     this.attackDuration = 1000 // Milliseconds
 
     this.lastAnimation = 'down'
@@ -33,7 +33,7 @@ export class Enemy extends Phaser.Sprite {
     this.animations.add('rightwalk', [8, 9, 10, 11])
     this.animations.add('downwalk', [0, 1, 2, 3])
 
-    this.animations.add('attack', [16,17,18,19,20,21,22,23,24,25,26])
+    this.animations.add('attack', [16,16,17,17,18,18,19,19,   20,21,22,21,20,21,22,   23,23,24,24,25,25,26,26])
   }
 
   animateWalkingUp () {
