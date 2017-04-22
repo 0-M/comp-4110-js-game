@@ -5,18 +5,23 @@ import { health } from '../../ui/health'
 import { xp } from '../../ui/xp'
 import { ClownBoss } from '../../sprites/ClownBoss'
 
+import Weapon from '../../ui/item'
+import { Item } from '../../ui/item'
+import { Wearable } from '../../ui/item'
+
 export default class extends Phaser.State {
   init () {
   }
   preload () {
     this.load.tilemap('level1map', 'assets/maps/entry_pretty.json', null, Phaser.Tilemap.TILED_JSON)
-    // this.load.image('pizza', 'assets/images/pizza-1.png')
-    // this.load.image('columns_set', 'assets/maps/tilesets/columns.png')
     this.load.image('tiles', 'assets/maps/tilesets/pretty.png')
+    this.load.image('basic-sword', 'spritesheets/items/equipment/basic-sword.png')
   }
   create () {
     this.game.tileWidth = this.tileWidth = 48
     this.setupTileMap()
+    this.sword
+    this.itemGroup = this.game.add.group()
     health.addHealthToLevel(this)
     xp.addXPToLevel(this)
     this.game.physics.startSystem(Phaser.Physics.ARCADE)
@@ -25,19 +30,19 @@ export default class extends Phaser.State {
   }
 
   setupTileMap () {
-      //  The 'tavern' key here is the Loader key given in game.load.tilemap
+    //  The 'tavern' key here is the Loader key given in game.load.tilemap
     let map = this.game.add.tilemap('level1map')
-  // store a reference so we can access it elsewhere on this class
+    // store a reference so we can access it elsewhere on this class
     this.map = map
 
-  // The first parameter is the tileset name, as specified in the Tiled map editor (and in the tilemap json file)
-  // The second parameter maps this name to the Phaser.Cache key 'tiles'
-  // map.addTilesetImage('columns_combined', 'columns_set')
-  //  map.addTilesetImage('util_tiles', 'util_set')
+    // The first parameter is the tileset name, as specified in the Tiled map editor (and in the tilemap json file)
+    // The second parameter maps this name to the Phaser.Cache key 'tiles'
+    // map.addTilesetImage('columns_combined', 'columns_set')
+    //  map.addTilesetImage('util_tiles', 'util_set')
     map.addTilesetImage('pretty', 'tiles')
 
-  // create the base layer, these are the floors, walls
-  // and anything else we want behind any sprites
+    // create the base layer, these are the floors, walls
+    // and anything else we want behind any sprites
     map.createLayer('Grass')
     map.createLayer('Collision_tiles')
 
@@ -59,6 +64,22 @@ export default class extends Phaser.State {
   //  This resizes the game world to match the layer dimensions
     this.collisionLayer.resizeWorld()
 
+    // Item init
+    var sword = new Item({
+        game: this.game,
+        x: 150,
+        y: 150,
+        asset: 'basic-sword',
+        player: this.player,
+        itemId: 0,
+        stats_flat: [0,5,0],
+        stats_per: [0,0,0]
+    })
+    this.sword = sword
+    this.game.physics.enable(this.sword, Phaser.Physics.ARCADE)
+    this.sword.body.onCollide = new Phaser.Signal()
+    this.game.add.existing(this.sword)
+      
   // we will have to initialize our player here
   // so it's sprite will show between the base and foreground tiles
     this.initPlayer()
@@ -106,6 +127,7 @@ export default class extends Phaser.State {
       tileX: 2,
       tileY: 4
     })
+    
     this.game.add.existing(this.player)
   }
 
@@ -124,6 +146,7 @@ export default class extends Phaser.State {
 
   update () {
     this.game.physics.arcade.collide(this.player, this.collisionLayer)
+    this.game.physics.arcade.collide(this.player, this.sword)
 
     if (Phaser.Rectangle.containsPoint(this.exitRect_1, this.player.position)) {
       this.resetPlayer()
@@ -136,6 +159,9 @@ export default class extends Phaser.State {
     if (Phaser.Rectangle.containsPoint(this.fenceRect_1, this.player.position)) {
       this.player.can_move = false
     }
+      
+    // Item collision detection
+    this.sword.body.onCollide.add(this.moveSwordToInventory, this)
   }
 
   initEnemy () {
@@ -156,5 +182,12 @@ export default class extends Phaser.State {
   stopPlayer () {
     this.player.velocity.x = 0
     this.player.velocity.y = 0
+  }
+  moveSwordToInventory(){
+      this.sword.collected()
+      this.sword.x = 100
+      this.sword.y = 500
+      this.sword.body.velocity.x = 0
+      this.sword.body.velocity.y = 0
   }
 }

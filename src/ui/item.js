@@ -12,9 +12,12 @@ export class Item extends Phaser.Sprite {
     this.stat_arr_flat = stats_flat
     this.stat_arr_per = stats_per
 
-    this.body.onCollide = new Phaser.Signal()
-    this.body.onCollide.add(this.collected, this)
+    //this.body.onCollide = new Phaser.Signal()
+    //this.body.onCollide.add(this.collected, this)
   }
+    collected(){
+        console.log("Collected the swawrad!")
+    }
 }
 
 export class Consumable extends Item {
