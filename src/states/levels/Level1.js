@@ -6,7 +6,7 @@ import { xp } from '../../ui/xp'
 
 import { FatClown } from '../../sprites/FatClown'
 import { ClownBoss } from '../../sprites/ClownBoss'
-// import { SkinnyClown } from '../../sprites/SkinnyClown'
+import { SkinnyClown } from '../../sprites/SkinnyClown'
 import { StrongClown } from '../../sprites/StrongClown'
 
 import Weapon from '../../ui/item'
@@ -152,13 +152,18 @@ export default class extends Phaser.State {
     this.game.physics.arcade.collide(this.player, this.collisionLayer)
     this.game.physics.arcade.collide(this.player, this.sword)
 
-    // Player collide with enemies.
-    for (var i = 0; i < this.enemies.length; i++) {
-      this.game.physics.arcade.collide(this.player, this.enemies[i])
+    if (!this.player.dodging)
+    {
+      // Player collide with enemies.
+      for (var i = 0; i < this.enemies.length; i++) {
+        this.game.physics.arcade.collide(this.player, this.enemies[i])
+      }
     }
 
     // Enemies collide with each other.
     for (var i = 0; i < this.enemies.length; i++) {
+      // Enemies collide with walls
+      this.game.physics.arcade.collide(this.enemies[i], this.collisionLayer)
       for (var j = i; j < this.enemies.length; j++) {
         this.game.physics.arcade.collide(this.enemies[j], this.enemies[i])
       }
@@ -187,6 +192,8 @@ export default class extends Phaser.State {
     var e = new StrongClown(this.game, 5, 5, 5)
     enemies.push(e)
     e = new FatClown(this.game, 1, 1, 1)
+    enemies.push(e)
+    e = new SkinnyClown(this.game, 3, 3, 3)
     enemies.push(e)
 
     this.enemies = enemies

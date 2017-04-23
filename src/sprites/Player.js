@@ -10,6 +10,7 @@ export default class extends Phaser.Sprite {
     // this.cursors = game.input.keyboard.createCursorKeys()
     this.moving = false
     this.animating = false
+    this.dodging = false
 
     game.physics.arcade.enable(this)
     game.camera.follow(this)
@@ -118,6 +119,7 @@ export default class extends Phaser.Sprite {
   setFalse() {
     this.animating = false
     this.moving = false
+    this.dodging = false
   }
 
   getDiagVect() {
@@ -152,6 +154,7 @@ export default class extends Phaser.Sprite {
       } else if (this.cursors.dodge.isDown) {
           this.moving = true
           this.animating = true
+          this.dodging = true
         if (this.lastAnimation == 'up') {
           this.body.velocity.y = -this.dodgeSpeed
           this.animateDodgingUp()

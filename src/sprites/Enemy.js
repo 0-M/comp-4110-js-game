@@ -21,8 +21,8 @@ export class Enemy extends Phaser.Sprite {
 
     this.animating = false
 
-    this.walkSpeed = 150
     this.walkAnimSpeed = 6    // Frames per second
+    this.walkSpeed = 150
 
     this.lastAnimation = 'down'
     this.animations.add('upwalk', [12, 13, 14, 15])
