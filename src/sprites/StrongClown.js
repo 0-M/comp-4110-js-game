@@ -8,6 +8,9 @@ export class StrongClown extends Enemy {
     this.attackAnimSpeed = 12   // Frames per second
     this.attackDuration = 1000  // Milliseconds
 
+    this.walkSpeed = 200
+    this.walkAnimSpeed = this.walkSpeed / 16.6
+
     this.animations.add('rightattack', [16,18,16,19,16,20,17,17,17,17])
     this.animations.add('leftattack',  [21,23,21,24,21,25,22,22,22,22])
     this.animations.add('upattack',  [37,39,37,40,37,41,38,38,38,38])

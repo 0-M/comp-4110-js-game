@@ -152,18 +152,19 @@ export default class extends Phaser.State {
     this.game.physics.arcade.collide(this.player, this.collisionLayer)
     this.game.physics.arcade.collide(this.player, this.sword)
 
-    if (!this.player.dodging)
-    {
+    if (!this.player.dodging) {
       // Player collide with enemies.
       for (var i = 0; i < this.enemies.length; i++) {
         this.game.physics.arcade.collide(this.player, this.enemies[i])
       }
     }
 
-    // Enemies collide with each other.
     for (var i = 0; i < this.enemies.length; i++) {
+
       // Enemies collide with walls
       this.game.physics.arcade.collide(this.enemies[i], this.collisionLayer)
+
+      // Enemies collide with each other.
       for (var j = i; j < this.enemies.length; j++) {
         this.game.physics.arcade.collide(this.enemies[j], this.enemies[i])
       }
@@ -194,6 +195,8 @@ export default class extends Phaser.State {
     e = new FatClown(this.game, 1, 1, 1)
     enemies.push(e)
     e = new SkinnyClown(this.game, 3, 3, 3)
+    enemies.push(e)
+    e = new ClownBoss(this.game, 7, 7, 7)
     enemies.push(e)
 
     this.enemies = enemies
