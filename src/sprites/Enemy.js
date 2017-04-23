@@ -11,6 +11,7 @@ export class Enemy extends Phaser.Sprite {
     game.physics.arcade.enable(this)
 
     this.difficulty = difficulty
+
     this.health = 100 * difficulty
     this.damage = 5 * difficulty
     this.defense = 10 * difficulty
@@ -20,9 +21,6 @@ export class Enemy extends Phaser.Sprite {
     this.setupPathFinding()
 
     this.animating = false
-
-    this.walkAnimSpeed = 6    // Frames per second
-    this.walkSpeed = 150
 
     this.lastAnimation = 'down'
     this.animations.add('upwalk', [12, 13, 14, 15])
@@ -100,22 +98,22 @@ export class Enemy extends Phaser.Sprite {
         let dy = myY - next.y
 
         if (dx > 0) {
-          this.body.velocity.x = -150
+          this.body.velocity.x = -this.walkSpeed
           this.animateWalkingLeft()
           this.lastAnimation = 'left'
         }
         else if (dx < 0) {
-          this.body.velocity.x = 150
+          this.body.velocity.x = this.walkSpeed
           this.animateWalkingRight()
           this.lastAnimation = 'right'
         }
         else if (dy > 0) {
-          this.body.velocity.y = -150
+          this.body.velocity.y = -this.walkSpeed
           this.animateWalkingUp()
           this.lastAnimation = 'up'
         }
         else if (dy < 0) {
-          this.body.velocity.y = 150
+          this.body.velocity.y = this.walkSpeed
           this.animateWalkingDown()
           this.lastAnimation = 'down'
         }
