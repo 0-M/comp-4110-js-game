@@ -152,7 +152,7 @@ export default class extends Phaser.Sprite {
       } else if (this.cursors.dodge.isDown) {
           this.moving = true
           this.animating = true
-        if (this.lastAnimation == 'up' ) {
+        if (this.lastAnimation == 'up') {
           this.body.velocity.y = -this.dodgeSpeed
           this.animateDodgingUp()
         } else if (this.lastAnimation == 'down') {
@@ -202,7 +202,7 @@ export default class extends Phaser.Sprite {
           this.body.velocity.x = this.walkSpeed
           this.animateWalkingRight()
           this.lastAnimation = 'right'
-         } else {
+        } else {
           if (this.lastAnimation == 'up') {
             this.frame = 12
           } else if (this.lastAnimation == 'down') {

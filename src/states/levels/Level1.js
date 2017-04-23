@@ -3,7 +3,11 @@ import Player from '../../sprites/Player'
 import { pause } from '../../ui/pause'
 import { health } from '../../ui/health'
 import { xp } from '../../ui/xp'
+
+import { FatClown } from '../../sprites/FatClown'
 import { ClownBoss } from '../../sprites/ClownBoss'
+// import { SkinnyClown } from '../../sprites/SkinnyClown'
+import { StrongClown } from '../../sprites/StrongClown'
 
 import Weapon from '../../ui/item'
 import { Item } from '../../ui/item'
@@ -79,7 +83,7 @@ export default class extends Phaser.State {
     this.game.physics.enable(this.sword, Phaser.Physics.ARCADE)
     this.sword.body.onCollide = new Phaser.Signal()
     this.game.add.existing(this.sword)
-      
+
   // we will have to initialize our player here
   // so it's sprite will show between the base and foreground tiles
     this.initPlayer()
@@ -127,7 +131,7 @@ export default class extends Phaser.State {
       tileX: 2,
       tileY: 4
     })
-    
+
     this.game.add.existing(this.player)
   }
 
@@ -148,6 +152,19 @@ export default class extends Phaser.State {
     this.game.physics.arcade.collide(this.player, this.collisionLayer)
     this.game.physics.arcade.collide(this.player, this.sword)
 
+    // Player collide with enemies.
+    // for (var i = 0; i < this.enemies.length; i++) {
+    //   this.game.physics.arcade.collide(this.player, this.enemies[i])
+    // }
+
+    // Enemies collide with each other.
+    for (var i = 0; i < this.enemies.length; i++) {
+      for (var j = i; j < this.enemies.length; j++) {
+        this.game.physics.arcade.collide(this.enemies[j], this.enemies[i])
+      }
+    }
+
+
     if (Phaser.Rectangle.containsPoint(this.exitRect_1, this.player.position)) {
       this.resetPlayer()
     }
@@ -159,7 +176,7 @@ export default class extends Phaser.State {
     if (Phaser.Rectangle.containsPoint(this.fenceRect_1, this.player.position)) {
       this.player.can_move = false
     }
-      
+
     // Item collision detection
     this.sword.body.onCollide.add(this.moveSwordToInventory, this)
   }
@@ -167,7 +184,9 @@ export default class extends Phaser.State {
   initEnemy () {
     var enemies = []
 
-    var e = new ClownBoss(this.game, 5, 5, 5)
+    var e = new StrongClown(this.game, 5, 5, 5)
+    enemies.push(e)
+    e = new FatClown(this.game, 1, 1, 1)
     enemies.push(e)
 
     this.enemies = enemies
