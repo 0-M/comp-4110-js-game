@@ -14,13 +14,14 @@ export class FatClown extends Enemy {
     this.animations.add('attack', [16,16,17,17,18,18,19,19,   20,21,22,21,20,21,22,   23,23,24,24,25,25,26,26])
   }
 
-  otherAttack () {
-    console.log('other attack from FatClown!')
-  }
-
   animateAttacking () {
     this.animations.play('attack', this.attackAnimSpeed, false)
     this.lastAnimation = 'down'
     setTimeout(() => {this.setAnimatingFalse()}, this.attackDuration);
   }
+
+  otherAttack () {
+    console.log('other attack from FatClown!')
+  }
+
 }

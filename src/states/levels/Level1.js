@@ -190,11 +190,13 @@ export default class extends Phaser.State {
   initEnemy () {
     var enemies = []
 
-    var e = new StrongClown(this.game, 5, 5, 5)
-    enemies.push(e)
-    e = new FatClown(this.game, 1, 1, 1)
-    enemies.push(e)
-    e = new SkinnyClown(this.game, 3, 3, 3)
+    // var e = new StrongClown(this.game, 5, 5, 5)
+    // enemies.push(e)
+    // e = new FatClown(this.game, 1, 1, 1)
+    // enemies.push(e)
+    // e = new SkinnyClown(this.game, 3, 3, 3)
+    // enemies.push(e)
+    var e = new ClownBoss(this.game, 7, 7, 7)
     enemies.push(e)
 
     this.enemies = enemies
