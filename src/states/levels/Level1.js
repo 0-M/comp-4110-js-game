@@ -153,9 +153,9 @@ export default class extends Phaser.State {
     this.game.physics.arcade.collide(this.player, this.sword)
 
     // Player collide with enemies.
-    // for (var i = 0; i < this.enemies.length; i++) {
-    //   this.game.physics.arcade.collide(this.player, this.enemies[i])
-    // }
+    for (var i = 0; i < this.enemies.length; i++) {
+      this.game.physics.arcade.collide(this.player, this.enemies[i])
+    }
 
     // Enemies collide with each other.
     for (var i = 0; i < this.enemies.length; i++) {
