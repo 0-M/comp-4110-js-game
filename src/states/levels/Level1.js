@@ -9,12 +9,11 @@ import { ClownBoss } from '../../sprites/ClownBoss'
 import { SkinnyClown } from '../../sprites/SkinnyClown'
 import { StrongClown } from '../../sprites/StrongClown'
 
-import Weapon from '../../ui/item'
+// import Weapon from '../../ui/item'
 import { Item } from '../../ui/item'
-import { Wearable } from '../../ui/item'
+// import { Wearable } from '../../ui/item'
 
 export default class extends Phaser.State {
-
   init () {
   }
 
@@ -26,26 +25,24 @@ export default class extends Phaser.State {
   }
 
   create () {
-
-    this.soundtrack = game.add.audio('circus_melody')
+    this.game.currentLevel = 'Level1'
+    this.soundtrack = this.game.add.audio('circus_melody')
     this.soundtrack.loop = true
     this.soundtrack.volume = 0.5
     this.soundtrack.play()
 
     this.game.tileWidth = this.tileWidth = 48
     this.setupTileMap()
-    this.sword
+    // this.sword
     this.itemGroup = this.game.add.group()
     health.addHealthToLevel(this)
     xp.addXPToLevel(this)
     this.game.physics.startSystem(Phaser.Physics.ARCADE)
     var escKey = this.input.keyboard.addKey(Phaser.Keyboard.P)
     escKey.onDown.add(this.togglePause, this)
-
   }
 
   update () {
-
     this.game.physics.arcade.collide(this.player, this.collisionLayer)
     this.game.physics.arcade.collide(this.player, this.sword)
 
@@ -57,7 +54,6 @@ export default class extends Phaser.State {
     // }
 
     for (var i = 0; i < this.enemies.length; i++) {
-
       // Enemies collide with walls
       this.game.physics.arcade.collide(this.enemies[i], this.collisionLayer)
 
@@ -66,7 +62,6 @@ export default class extends Phaser.State {
         this.game.physics.arcade.collide(this.enemies[j], this.enemies[i])
       }
     }
-
 
     if (Phaser.Rectangle.containsPoint(this.exitRect_1, this.player.position)) {
       this.resetPlayer()
@@ -82,11 +77,9 @@ export default class extends Phaser.State {
 
     // Item collision detection
     this.sword.body.onCollide.add(this.moveSwordToInventory, this)
-
   }
 
   setupTileMap () {
-
     //  The 'tavern' key here is the Loader key given in game.load.tilemap
     let map = this.game.add.tilemap('level1map')
     // store a reference so we can access it elsewhere on this class
@@ -123,14 +116,14 @@ export default class extends Phaser.State {
 
     // Item init
     var sword = new Item({
-        game: this.game,
-        x: 150,
-        y: 150,
-        asset: 'basic-sword',
-        player: this.player,
-        itemId: 666,
-        stats_flat: [0,5,0],
-        stats_per: [0,0,0]
+      game: this.game,
+      x: 150,
+      y: 150,
+      asset: 'basic-sword',
+      player: this.player,
+      itemId: 666,
+      stats_flat: [0, 5, 0],
+      stats_per: [0, 0, 0]
     })
     this.sword = sword
     this.game.physics.enable(this.sword, Phaser.Physics.ARCADE)
@@ -232,8 +225,7 @@ export default class extends Phaser.State {
     this.player.velocity.y = 0
   }
 
-  moveSwordToInventory(){
+  moveSwordToInventory () {
     this.player.inv.pickupItem(this.sword)
   }
-
 }
