@@ -6,23 +6,23 @@ import BootState from './states/Boot'
 import SplashState from './states/Splash'
 import GameState from './states/Game'
 import Level1 from './states/levels/Level1'
-
-import config from './config'
+import GameOver from './states/GameOver'
 
 class Game extends Phaser.Game {
   constructor () {
-    const docElement = document.documentElement
-    //const width = docElement.clientWidth > config.gameWidth ? config.gameWidth : docElement.clientWidth
-    //const height = docElement.clientHeight > config.gameHeight ? config.gameHeight : docElement.clientHeight
+    // const docElement = document.documentElement
+    // const width = docElement.clientWidth > config.gameWidth ? config.gameWidth : docElement.clientWidth
+    // const height = docElement.clientHeight > config.gameHeight ? config.gameHeight : docElement.clientHeight
     const width = 800
     const height = 600
-    
+
     super(width, height, Phaser.CANVAS, 'content', null)
 
     this.state.add('Boot', BootState, false)
     this.state.add('Splash', SplashState, false)
     this.state.add('Game', GameState, false)
     this.state.add('Level1', Level1, false)
+    this.state.add('GameOver', GameOver, false)
 
     this.state.start('Boot')
   }
