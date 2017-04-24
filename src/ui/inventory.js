@@ -26,8 +26,9 @@ export class Inventory {
       itemObj.body.velocity.x = 0
       itemObj.body.velocity.y = 0
     }
-  }
 
+  }
+  
   useItem (itemObj) {
     var i = this.inventory.indexOf(itemObj)
     // if this is consume class, perform consume method here
@@ -37,7 +38,7 @@ export class Inventory {
     this.inventory.forEach(moveItem)
     console.log("used an item!!! "+itemObj.item_id)
   }
-
+  
   removeItem (itemObj) {
     var i = this.inventory.indexOf(itemObj)
     this.inventory.splice(i, 1)

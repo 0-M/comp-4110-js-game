@@ -232,7 +232,7 @@ export default class extends Phaser.State {
     this.player.velocity.y = 0
   }
 
-  moveSwordToInventory() {
+  moveSwordToInventory(){
     this.player.inv.pickupItem(this.sword)
   }
 
