@@ -17,7 +17,7 @@ export class StrongClown extends Enemy {
     this.animations.add('downattack',  [32,34,32,35,32,36,33,33,33,33])
 
     this.attackSound = game.add.audio('punch_flurry')
-    this.attackSound.volume = 0.3
+    this.attackSound.volume = 0.5
 
   }
 

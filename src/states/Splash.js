@@ -14,24 +14,28 @@ export default class extends Phaser.State {
     // load your assets
     //
 
+    this.load.image('pizza', 'assets/images/pizza-1.png')
     this.load.spritesheet('knight', 'assets/images/knighter.png', 32, 48) // What is this still doing here?
+
+    // Characters
     this.load.spritesheet('clownBoss', 'assets/spritesheets/characters/enemy/monster_clown_48x87.png', 48, 87)
     this.load.spritesheet('fatClown', 'assets/spritesheets/characters/enemy/fat_clown_24x48.png', 24, 48)
     this.load.spritesheet('strongClown', 'assets/spritesheets/characters/enemy/strong_clown_28x49.png', 28, 49)
     this.load.spritesheet('skinnyClown', 'assets/spritesheets/characters/enemy/skinny_clown_24x48.png', 24, 48)
     this.load.spritesheet('player_sprite', 'assets/spritesheets/characters/player/kid_cotton_24x48.png', 24, 48)
 
-    this.load.spritesheet('smelly_pizza', 'assets/spritesheets/items/consumables/smelly_pizza_15x18x6', 15, 18)
-    this.load.image('pizza', 'assets/images/pizza-1.png')
+    // Items
+    this.load.spritesheet('smelly_pizza', 'assets/spritesheets/items/consumables/smelly_pizza_15x18x6.png', 15, 18)
+    this.load.spritesheet('cola', 'assets/spritesheets/items/consumables/cola_8x18x14.png', 8, 18)
+    this.load.spritesheet('super_cola', 'assets/spritesheets/items/consumables/super_cola_6x18x12.png', 6, 18)
 
+    // Audio
     this.load.audio('swoosh', 'assets/audio/swoosh.wav')
     this.load.audio('pillow_thud', 'assets/audio/pillow_thud.wav')
-
     this.load.audio('water_hose', 'assets/audio/gardern_hose.wav')
     this.load.audio('punch_flurry', 'assets/audio/punch_flurry.wav')
     this.load.audio('monster_roar_bite', 'assets/audio/monster_roar_bite.wav')
     this.load.audio('claw_slash', 'assets/audio/claw_slash.wav')
-
     this.load.audio('game_over', 'assets/audio/game_over.wav')
 
   }
