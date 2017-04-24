@@ -107,7 +107,9 @@ export default class extends Phaser.Sprite {
     if (this.animations.currentAnim) {
       this.animations.currentAnim.stop()
     }
-
+    var currentState = this.game.state.current
+    this.game.state.states[currentState].soundtrack.stop()
+    this.deathSound.play()
     this.animations.play('die', this.dieAnimSpeed, false)
     setTimeout(() => {
       this.setAnimatingFalse()
