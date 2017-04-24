@@ -11,6 +11,7 @@ export class Enemy extends Phaser.Sprite {
     game.physics.arcade.enable(this)
 
     this.difficulty = difficulty
+
     this.health = 100 * difficulty
     this.damage = 5 * difficulty
     this.defense = 10 * difficulty
@@ -18,6 +19,32 @@ export class Enemy extends Phaser.Sprite {
     this.meleeCooldown = 0
     this.attacking = false
     this.setupPathFinding()
+
+    this.animating = false
+
+    this.lastAnimation = 'down'
+    this.animations.add('upwalk', [12, 13, 14, 15])
+    this.animations.add('leftwalk', [4, 5, 6, 7])
+    this.animations.add('rightwalk', [8, 9, 10, 11])
+    this.animations.add('downwalk', [0, 1, 2, 3])
+
+  }
+
+  animateWalkingUp () {
+    this.animations.play('upwalk', this.walkAnimSpeed, false)
+  }
+  animateWalkingDown () {
+    this.animations.play('downwalk', this.walkAnimSpeed, false)
+  }
+  animateWalkingLeft () {
+    this.animations.play('leftwalk', this.walkAnimSpeed, false)
+  }
+  animateWalkingRight () {
+    this.animations.play('rightwalk', this.walkAnimSpeed, false)
+  }
+
+  setAnimatingFalse() {
+    this.animating = false
   }
 
   cooldown (key) {
@@ -61,32 +88,54 @@ export class Enemy extends Phaser.Sprite {
   }
 
   moveUsingPath (myX, myY, path) {
+
     this.body.velocity.x = 0
     this.body.velocity.y = 0
 
-    if (path.length > 1) {
-      let next = {x: path[1][0], y: path[1][1]}
-      let dx = myX - next.x
-      let dy = myY - next.y
+    if(!this.animating) {
+      if (path.length > 1) {
+        let next = {x: path[1][0], y: path[1][1]}
+        let dx = myX - next.x
+        let dy = myY - next.y
 
-      if (dx > 0) {
-        this.body.velocity.x = -150
-      }
-      if (dx < 0) {
-        this.body.velocity.x = 150
-      }
-      if (dy > 0) {
-        this.body.velocity.y = -150
-      }
-      if (dy < 0) {
-        this.body.velocity.y = 150
+        if (dx > 0) {
+          this.body.velocity.x = -this.walkSpeed
+          this.animateWalkingLeft()
+          this.lastAnimation = 'left'
+        }
+        else if (dx < 0) {
+          this.body.velocity.x = this.walkSpeed
+          this.animateWalkingRight()
+          this.lastAnimation = 'right'
+        }
+        else if (dy > 0) {
+          this.body.velocity.y = -this.walkSpeed
+          this.animateWalkingUp()
+          this.lastAnimation = 'up'
+        }
+        else if (dy < 0) {
+          this.body.velocity.y = this.walkSpeed
+          this.animateWalkingDown()
+          this.lastAnimation = 'down'
+        }
+      } else {
+        if (this.lastAnimation == 'up') {
+          this.frame = 12
+        } else if (this.lastAnimation == 'down') {
+          this.frame = 0
+        } else if (this.lastAnimation == 'left') {
+          this.frame = 4
+        } else {
+          this.frame = 8
+        }
       }
     }
+
   }
 
   update () {
     this.followPlayer()
-    this.attack()
+    this.attack(this.lastAnimation)
   }
 
   closeEnoughToPlayerToMelee () {
@@ -103,10 +152,16 @@ export class Enemy extends Phaser.Sprite {
   // does all attacks from enemy to player
   // sets a cooldown timer for melee or other attack
   attack (direction) {
+
     if (!this.attacking) {
       this.attacking = true
       if (this.meleeCooldown === 0 && this.closeEnoughToPlayerToMelee()) {
         // do melee attack
+
+        this.attackSound.play()
+        this.animating = true
+        this.animateAttacking(direction)
+
         combat.handleAttackOnPlayer(this.game.player, this)
         this.meleeCooldown = this.meleeTime
         this.cooldown('meleeCooldown')
@@ -121,5 +176,6 @@ export class Enemy extends Phaser.Sprite {
         }, 1000)
       }
     }
+
   }
 }
