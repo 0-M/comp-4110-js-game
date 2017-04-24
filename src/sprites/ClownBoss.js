@@ -12,6 +12,8 @@ export class ClownBoss extends Enemy {
     this.walkAnimSpeed = this.walkSpeed / 16.6
 
     this.animations.add('attack', [16,16,16,17,17,17,18,19,20,21,22,23,24,25,16])
+    this.attackSound = game.add.audio('claw_slash')
+    this.attackSound.volume = 0.06
 
   }
 
