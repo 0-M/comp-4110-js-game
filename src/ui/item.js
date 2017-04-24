@@ -1,23 +1,33 @@
 import Phaser from 'phaser'
 
 export class Item extends Phaser.Sprite {
-  constructor ({game, x, y, asset, player, itemId, stats_flat, stats_per}) { // stats_flat is an array to set stat_arr equivalent to - I hope that's how passing arrays works
+
+  // stats_flat is an array to set stat_arr equivalent to - I hope that's how passing arrays works
+  constructor ({game, x, y, asset, player, itemId, stats_flat, stats_per, anim}) {
     super(game, x, y, asset)
     var item_id // may not be needed - just thought i'd put it in here
     var stat_arr_flat = [0, 0, 0] // [0] = health [1] = damage [2] = armor
     var stat_arr_per = [0, 0, 0]  // [0] = health [1] = damage [2] = armor - if we wanna do % increases
-        // We'll use stat_arr for flat increases, we may want to use both because then we can have consumables with flat and percent increase
-        // In SRS we said consume will be handled by inventory, may be changed later
+    // We'll use stat_arr for flat increases, we may want to use both because then we can have consumables with flat and percent increase
+    // In SRS we said consume will be handled by inventory, may be changed later
     this.item_id = itemId
     this.stat_arr_flat = stats_flat
     this.stat_arr_per = stats_per
-
     //this.body.onCollide = new Phaser.Signal()
     //this.body.onCollide.add(this.collected, this)
+
+
+    this.animate = anim
   }
-    collected(){
-        console.log("Collected the swawrad!")
-    }
+
+  collected(){
+    console.log("Collected the swawrad!")
+  }
+
+  addAnimation(anim_arr) {
+    this.animations = anim_arr
+  }
+
 }
 
 export class Consumable extends Item {

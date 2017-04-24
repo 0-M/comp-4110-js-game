@@ -123,12 +123,32 @@ export default class extends Phaser.State {
       player: this.player,
       itemId: 666,
       stats_flat: [0, 5, 0],
-      stats_per: [0, 0, 0]
+      stats_per: [0, 0, 0],
+      anim: false
     })
+
     this.sword = sword
     this.game.physics.enable(this.sword, Phaser.Physics.ARCADE)
     this.sword.body.onCollide = new Phaser.Signal()
     this.game.add.existing(this.sword)
+
+    var pizza = new Item({
+      game: this.game,
+      x: 500,
+      y: 500,
+      asset: 'smelly_pizza',
+      player: this.player,
+      itemId: 111,
+      stats_flat: [0, 5, 0],
+      stats_per: [0, 0, 0],
+      anim: false
+
+    })
+
+    this.pizza = pizza
+    this.game.physics.enable(this.pizza, Phaser.Physics.ARCADE)
+    this.pizza.body.onCollide = new Phaser.Signal()
+    this.game.add.existing(this.pizza)
 
     // we will have to initialize our player here
     // so it's sprite will show between the base and foreground tiles
