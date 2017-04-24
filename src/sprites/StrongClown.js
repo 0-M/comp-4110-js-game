@@ -16,6 +16,9 @@ export class StrongClown extends Enemy {
     this.animations.add('upattack',  [37,39,37,40,37,41,38,38,38,38])
     this.animations.add('downattack',  [32,34,32,35,32,36,33,33,33,33])
 
+    this.attackSound = game.add.audio('punch_flurry')
+    this.attackSound.volume = 0.3
+
   }
 
   animateAttacking(direction) {

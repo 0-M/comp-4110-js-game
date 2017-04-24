@@ -26,6 +26,7 @@ export class Inventory {
       itemObj.body.velocity.x = 0
       itemObj.body.velocity.y = 0
     }
+
   }
   
   useItem (itemObj) {
@@ -46,7 +47,7 @@ export class Inventory {
     this.inventory.forEach(moveItem)
     console.log("removed an item!!! "+itemObj.item_id)
   }
-  
+
   moveItem (itemObj, index) {
     itemObj.x = 100*(index)
   }

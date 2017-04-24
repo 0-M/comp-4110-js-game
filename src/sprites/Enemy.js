@@ -88,6 +88,7 @@ export class Enemy extends Phaser.Sprite {
   }
 
   moveUsingPath (myX, myY, path) {
+
     this.body.velocity.x = 0
     this.body.velocity.y = 0
 
@@ -129,6 +130,7 @@ export class Enemy extends Phaser.Sprite {
         }
       }
     }
+
   }
 
   update () {
@@ -150,11 +152,13 @@ export class Enemy extends Phaser.Sprite {
   // does all attacks from enemy to player
   // sets a cooldown timer for melee or other attack
   attack (direction) {
+
     if (!this.attacking) {
       this.attacking = true
       if (this.meleeCooldown === 0 && this.closeEnoughToPlayerToMelee()) {
         // do melee attack
 
+        this.attackSound.play()
         this.animating = true
         this.animateAttacking(direction)
 
@@ -172,5 +176,6 @@ export class Enemy extends Phaser.Sprite {
         }, 1000)
       }
     }
+
   }
 }
