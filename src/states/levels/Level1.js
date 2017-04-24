@@ -18,6 +18,7 @@ export default class extends Phaser.State {
   }
 
   preload () {
+    this.load.image('ui_backdrop', 'assets/images/ui_backdrop.png')
     this.load.tilemap('level1map', 'assets/maps/entry_pretty.json', null, Phaser.Tilemap.TILED_JSON)
     this.load.image('tiles', 'assets/maps/tilesets/pretty.png')
     this.load.image('basic-sword', 'assets/spritesheets/items/equipment/basic-sword.png')
@@ -31,6 +32,7 @@ export default class extends Phaser.State {
     this.soundtrack.volume = 0.5
     this.soundtrack.play()
 
+    this.game.add.tileSprite(0, 0, 800, 600, 'ui_backdrop')
     this.game.tileWidth = this.tileWidth = 48
     this.setupTileMap()
     // this.sword
