@@ -10,6 +10,7 @@ export default class extends Phaser.Sprite {
     this.moving = false
     this.animating = false
     this.dodging = false
+    this.dead = false
 
     game.physics.arcade.enable(this)
     game.camera.follow(this)
@@ -102,9 +103,16 @@ export default class extends Phaser.Sprite {
     setTimeout(() => { this.setFalse() }, this.dodgeDuration)
   }
 
-  animateDeath () {
+  animateDeath (callback) {
+    if (this.animations.currentAnim) {
+      this.animations.currentAnim.stop()
+    }
+
     this.animations.play('die', this.dieAnimSpeed, false)
-    setTimeout(() => { this.setAnimatingFalse() }, this.deathDuration)
+    setTimeout(() => {
+      this.setAnimatingFalse()
+      callback()
+    }, this.deathDuration)
   }
 
   setAnimatingFalse () {
@@ -131,7 +139,7 @@ export default class extends Phaser.Sprite {
       this.body.velocity.y = 0
     }
 
-    if (!this.animating) {
+    if (!this.animating && !this.dead) {
       if (this.cursors.die.isDown) {
         this.animating = true
         this.deathSound.play()

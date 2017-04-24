@@ -178,7 +178,7 @@ export default class extends Phaser.State {
       tileY: 4
     })
 
-    this.game.add.existing(this.player)
+    this.game.add.existing(this.game.player)
   }
 
   togglePause () {

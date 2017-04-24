@@ -36,9 +36,15 @@ class Health {
   }
 
   death () {
-    var currentState = this.game.state.current
-    this.game.state.states[currentState].soundtrack.stop()
-    this.game.state.start('GameOver')
+    if (!this.game.player.dead) {
+      this.game.player.dead = true
+      this.game.player.animateDeath(() => {
+        this.game.player.dead = false
+        var currentState = this.game.state.current
+        this.game.state.states[currentState].soundtrack.stop()
+        this.game.state.start('GameOver')
+      })
+    }
   }
 
   reset () {
