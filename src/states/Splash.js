@@ -31,6 +31,7 @@ export default class extends Phaser.State {
 
     // Audio
     this.load.audio('swoosh', 'assets/audio/swoosh.wav')
+    this.load.audio('pillow_swing', 'assets/audio/pillow_swing.wav')
     this.load.audio('pillow_thud', 'assets/audio/pillow_thud.wav')
     this.load.audio('water_hose', 'assets/audio/gardern_hose.wav')
     this.load.audio('punch_flurry', 'assets/audio/punch_flurry.wav')
