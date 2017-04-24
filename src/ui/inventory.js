@@ -18,7 +18,7 @@ class Inventory {
       this.space -= 1
       console.log('added an item!!! ' + this.space)
       itemObj.x = 100 * (this.inventory.length)
-      itemObj.y = 500
+      itemObj.y = 510
       itemObj.body.velocity.x = 0
       itemObj.body.velocity.y = 0
     } else {
