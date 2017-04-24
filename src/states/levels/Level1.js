@@ -128,7 +128,7 @@ export default class extends Phaser.State {
         y: 150,
         asset: 'basic-sword',
         player: this.player,
-        itemId: 0,
+        itemId: 666,
         stats_flat: [0,5,0],
         stats_per: [0,0,0]
     })
@@ -233,11 +233,7 @@ export default class extends Phaser.State {
   }
 
   moveSwordToInventory() {
-      this.sword.collected()
-      this.sword.x = 100
-      this.sword.y = 500
-      this.sword.body.velocity.x = 0
-      this.sword.body.velocity.y = 0
+    this.player.inv.pickupItem(this.sword)
   }
 
 }
