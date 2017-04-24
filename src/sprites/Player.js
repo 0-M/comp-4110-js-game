@@ -1,6 +1,5 @@
 import Phaser from 'phaser'
 import { Inventory } from '../ui/inventory'
-import { Weapon } from '../ui/item'
 
 export default class extends Phaser.Sprite {
   constructor ({game, x, y, asset}) {
