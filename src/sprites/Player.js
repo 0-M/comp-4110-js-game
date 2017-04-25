@@ -67,6 +67,7 @@ export default class extends Phaser.Sprite {
     this.shieldSound = game.add.audio('pillow_thud')
     this.deathSound = game.add.audio('death_sound')
     this.swordAttackSound = game.add.audio('sword_slash')
+    this.swordAttackSound.volume = 0.5
   }
 
   update () {
