@@ -67,18 +67,35 @@ export default class extends Phaser.State {
         this.game.physics.arcade.collide(this.enemies[j], this.enemies[i])
       }
     }
-
+    //console.log(this.enemies.length)
     if (Phaser.Rectangle.containsPoint(this.exitRect_1, this.player.position)) {
-      this.resetPlayer()
+      this.game.state.start('Level3')
     }
 
-    if (Phaser.Rectangle.containsPoint(this.exitRect_2, this.player.position)) {
-      this.resetPlayer()
-    }
+    // if (Phaser.Rectangle.containsPoint(this.exitRect_2, this.player.position)) {
+    //   this.resetPlayer()
+    // }
 
-    if (Phaser.Rectangle.containsPoint(this.fenceRect_1, this.player.position)) {
-      this.player.can_move = false
-    }
+    // if (Phaser.Rectangle.containsPoint(this.fenceRect_1, this.player.position)) {
+    //   //this.player.body.bounce.x = 1
+    //   //this.stopPlayer()
+    //   console.log('fence 1')
+    // }
+    // if (Phaser.Rectangle.containsPoint(this.fenceRect_2, this.player.position)) {
+    //   //this.player.body.bounce.x = 1
+    //   //this.stopPlayer()
+    //   console.log('fence 2')
+    // }
+    // if (Phaser.Rectangle.containsPoint(this.fenceRect_3, this.player.position)) {
+    //   //this.player.body.bounce.x = 1
+    //   //this.stopPlayer()
+    //   console.log('fence 3')
+    // }
+    // if (Phaser.Rectangle.containsPoint(this.fenceRect_4, this.player.position)) {
+    //   //this.player.body.bounce.x = 1
+    //   //this.stopPlayer()
+    //   console.log('fence 4')
+    // }
 
     // Item collision detection
     this.sword.body.onCollide.add(this.moveSwordToInventory, this)
@@ -130,18 +147,19 @@ export default class extends Phaser.State {
 
     var cola = new Item({
       game: this.game,
-      x: 150,
-      y: 150,
+      x: Math.floor(Math.random() * (400 - 100)) + 100,
+      y: Math.floor(Math.random() * (400 -100)) + 100,
       asset: 'cola',
       player: this.player,
       itemId: 420,
-      stats_flat: [10, 0, 0],
+      stats_flat: [500, 0, 0],
       stats_per: [0, 0, 0],
       dur: 10,
       consumable: true,
       equippable: false
     })
-
+    console.log(cola.x)
+    console.log(cola.y)
     this.sword = sword
     this.cola = cola
     this.game.physics.enable(this.sword, Phaser.Physics.ARCADE)
@@ -152,6 +170,9 @@ export default class extends Phaser.State {
     }
     this.game.add.existing(this.sword)
     this.game.add.existing(this.cola)
+    this.cola.body.sprite.scale.x = 2
+    this.cola.body.sprite.scale.y = 2
+    this.cola.body.sprite.antialiasing = false
 
     // we will have to initialize our player here
     // so it's sprite will show between the base and foreground tiles
@@ -169,20 +190,20 @@ export default class extends Phaser.State {
     let exit_1 = this.map.objects.metadata.find(o => o.name === 'exit_1')
     this.exitRect_1 = new Phaser.Rectangle(exit_1.x, exit_1.y, exit_1.width, exit_1.height)
 
-    let exit_2 = this.map.objects.metadata.find(o => o.name === 'exit_2')
-    this.exitRect_2 = new Phaser.Rectangle(exit_2.x, exit_2.y, exit_2.width, exit_2.height)
+    // let exit_2 = this.map.objects.metadata.find(o => o.name === 'exit_2')
+    // this.exitRect_2 = new Phaser.Rectangle(exit_2.x, exit_2.y, exit_2.width, exit_2.height)
 
-    let fence_1 = this.map.objects.metadata.find(o => o.name === 'fence_1')
-    this.fenceRect_1 = new Phaser.Rectangle(fence_1.x, fence_1.y, fence_1.width, fence_1.height)
-
-    let fence_2 = this.map.objects.metadata.find(o => o.name === 'fence_2')
-    this.fenceRect_2 = new Phaser.Rectangle(fence_2.x, fence_2.y, fence_2.width, fence_2.height)
-
-    let fence_3 = this.map.objects.metadata.find(o => o.name === 'fence_3')
-    this.fenceRect_3 = new Phaser.Rectangle(fence_3.x, fence_3.y, fence_3.width, fence_3.height)
-
-    let fence_4 = this.map.objects.metadata.find(o => o.name === 'fence_4')
-    this.fenceRect_4 = new Phaser.Rectangle(fence_4.x, fence_4.y, fence_4.width, fence_4.height)
+    // let fence_1 = this.map.objects.metadata.find(o => o.name === 'fence_1')
+    // this.fenceRect_1 = new Phaser.Rectangle(fence_1.x, fence_1.y, fence_1.width, fence_1.height)
+    //
+    // let fence_2 = this.map.objects.metadata.find(o => o.name === 'fence_2')
+    // this.fenceRect_2 = new Phaser.Rectangle(fence_2.x, fence_2.y, fence_2.width, fence_2.height)
+    //
+    // let fence_3 = this.map.objects.metadata.find(o => o.name === 'fence_3')
+    // this.fenceRect_3 = new Phaser.Rectangle(fence_3.x, fence_3.y, fence_3.width, fence_3.height)
+    //
+    // let fence_4 = this.map.objects.metadata.find(o => o.name === 'fence_4')
+    // this.fenceRect_4 = new Phaser.Rectangle(fence_4.x, fence_4.y, fence_4.width, fence_4.height)
 
     // let exit_2 = this.map.objects.metadata.find(o => o.name === 'exit_2')
     //  this.exitRect = new Phaser.Rectangle(exit.x, exit.y, exit.width, exit.height)
@@ -200,7 +221,6 @@ export default class extends Phaser.State {
       tileX: 2,
       tileY: 4
     })
-
     this.game.add.existing(this.game.player)
   }
 
@@ -245,8 +265,8 @@ export default class extends Phaser.State {
   }
 
   stopPlayer () {
-    this.player.velocity.x = 0
-    this.player.velocity.y = 0
+    this.player.body.velocity.x = 0
+    this.player.body.velocity.y = 0
   }
 
   moveSwordToInventory () {
@@ -258,7 +278,7 @@ export default class extends Phaser.State {
   // }
 
   moveCola () {
-    if (health.value < health.maxHealth) {
+    if (health.value + 500 < health.maxHealth) {
       console.log('coca cola')
       this.cola.body.velocity.x = 0
       this.cola.body.velocity.y = 0
