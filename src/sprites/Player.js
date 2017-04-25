@@ -247,11 +247,9 @@ export default class extends Phaser.Sprite {
   setAnimatingFalse () {
     this.animating = false
   }
-
   setMovingFalse () {
     this.moving = false
   }
-
   setFalse () {
     this.animating = false
     this.moving = false
