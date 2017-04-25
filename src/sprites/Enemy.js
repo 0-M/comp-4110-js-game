@@ -27,6 +27,9 @@ export class Enemy extends Phaser.Sprite {
     this.animations.add('leftwalk', [4, 5, 6, 7])
     this.animations.add('rightwalk', [8, 9, 10, 11])
     this.animations.add('downwalk', [0, 1, 2, 3])
+
+    this.killedSound = game.add.audio('npc_killed_sound')
+    this.killedSound.volume = 0.3
   }
 
   animateWalkingUp () {
@@ -171,4 +174,9 @@ export class Enemy extends Phaser.Sprite {
       }
     }
   }
+
+  playKilledSound() {
+    this.killedSound.play()
+  }
+
 }
