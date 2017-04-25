@@ -58,7 +58,7 @@ export default class extends Phaser.State {
 
     this.game.add.existing(this.game.player)
     this.soundtrack = game.add.audio('intro_music')
-    this.soundtrack.volume = 0.1  // Was a little too loud.
+    this.soundtrack.volume = 0.3
     this.soundtrack.loop = true
     this.soundtrack.play()
     this.game_start_sound = game.add.audio('gamestart_sound')
