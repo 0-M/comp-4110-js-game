@@ -11,7 +11,7 @@ import { StrongClown } from '../../sprites/StrongClown'
 
 // import Weapon from '../../ui/item'
 import { Item } from '../../ui/item'
-// import { Wearable } from '../../ui/item'
+import { Consumable } from '../../ui/item'
 
 export default class extends Phaser.State {
   init () {
@@ -46,6 +46,11 @@ export default class extends Phaser.State {
   update () {
     this.game.physics.arcade.collide(this.player, this.collisionLayer)
     this.game.physics.arcade.collide(this.player, this.sword)
+    if (this.cola)
+    {
+      this.game.physics.arcade.collide(this.player, this.cola)
+    }
+
 
     // if (!this.player.dodging) {
     //   // Player collide with enemies.
@@ -78,6 +83,7 @@ export default class extends Phaser.State {
 
     // Item collision detection
     this.sword.body.onCollide.add(this.moveSwordToInventory, this)
+    this.cola.body.onCollide.add(this.moveCola, this)
   }
 
   setupTileMap () {
@@ -123,13 +129,34 @@ export default class extends Phaser.State {
       asset: 'basic-sword',
       player: this.player,
       itemId: 666,
-      stats_flat: [0, 5, 0],
+      stats_flat: [0, 10000, 0],
       stats_per: [0, 0, 0]
     })
+
+    var cola = new Item({
+      game: this.game,
+      x: 150,
+      y: 150,
+      asset: 'cola',
+      player: this.player,
+      itemId: 420,
+      stats_flat: [10,0,0],
+      stats_per: [0,0,0],
+      dur: 10
+    })
+
+
     this.sword = sword
+    this.cola = cola
     this.game.physics.enable(this.sword, Phaser.Physics.ARCADE)
+    this.game.physics.enable(this.cola, Phaser.Physics.ARCADE)
     this.sword.body.onCollide = new Phaser.Signal()
+    if(this.cola)
+    {
+    this.cola.body.onCollide = new Phaser.Signal()
+    }
     this.game.add.existing(this.sword)
+    this.game.add.existing(this.cola)
 
     // we will have to initialize our player here
     // so it's sprite will show between the base and foreground tiles
@@ -215,7 +242,6 @@ export default class extends Phaser.State {
   }
 
   resetPlayer () {
-    xp.increaseBy(1)
     this.player.tileX = 8
     this.player.tileY = 4.5
     this.player.position.set(this.player.tileX * this.tileWidth, this.player.tileY * this.tileWidth)
@@ -229,4 +255,25 @@ export default class extends Phaser.State {
   moveSwordToInventory () {
     this.player.inv.pickupItem(this.sword)
   }
+
+  // colaReturn () {
+  //   this.cola.body.revive()
+  // }
+
+  moveCola () {
+    if (health.value < health.maxHealth)
+    {
+          console.log('coca cola')
+          this.cola.body.velocity.x = 0
+          this.cola.body.velocity.y = 0
+          this.cola.kill()
+          health.value = health.value
+        //  setTimeout(,1000)
+    }
+    else {
+      this.player.inv.pickupItem(this.cola)
+    }
+  }
+
+
 }
