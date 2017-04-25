@@ -1,9 +1,8 @@
 import Phaser from 'phaser'
 
 export class Item extends Phaser.Sprite {
-
   // stats_flat is an array to set stat_arr equivalent to - I hope that's how passing arrays works
-  constructor ({game, x, y, asset, player, itemId, stats_flat, stats_per}) {
+  constructor ({game, x, y, asset, player, itemId, stats_flat, stats_per, consumable, equippable}) {
     super(game, x, y, asset)
     var item_id // may not be needed - just thought i'd put it in here
     var stat_arr_flat = [0, 0, 0] // [0] = health [1] = damage [2] = armor
@@ -14,15 +13,16 @@ export class Item extends Phaser.Sprite {
     this.item_id = itemId
     this.stat_arr_flat = stats_flat
     this.stat_arr_per = stats_per
+    this.consumable = consumable
+    this.equippable = equippable
 
-    //this.body.onCollide = new Phaser.Signal()
-    //this.body.onCollide.add(this.collected, this)
+    // this.body.onCollide = new Phaser.Signal()
+    // this.body.onCollide.add(this.collected, this)
   }
 
-  collected(){
-    console.log("Collected the swawrad!")
+  collected () {
+    console.log('Collected the swawrad!')
   }
-
 }
 
 export class Consumable extends Item {

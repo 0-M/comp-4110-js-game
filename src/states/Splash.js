@@ -13,7 +13,7 @@ export default class extends Phaser.State {
     //
     // load your assets
     //
-
+    this.load.image('checkmark', 'assets/images/checkmark.png')
     this.load.image('pizza', 'assets/images/pizza-1.png')
     this.load.spritesheet('knight', 'assets/images/knighter.png', 32, 48) // What is this still doing here?
 
@@ -48,7 +48,6 @@ export default class extends Phaser.State {
     this.load.audio('intro_music', '/assets/audio/intro_music.wav')
     this.load.audio('circus_melody', 'assets/audio/circus_melody.wav')
     this.load.audio('gameover_music', 'assets/audio/gameover_music.wav')
-
   }
 
   create () {
