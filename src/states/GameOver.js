@@ -15,11 +15,13 @@ export default class extends Phaser.State {
 
     this.tileWidth = 64
 
-    this.soundtrack = this.game.add.audio('game_over')
-    this.soundtrack.volume = 0.1  // Was a little too loud.
+    this.game_start_sound = this.game.add.audio('gamestart_sound')
+
+    this.soundtrack = this.game.add.audio('gameover_music')
+    this.soundtrack.volume = 0.2
+    this.soundtrack.loop = true
     this.soundtrack.play()
 
-    this.game_start_sound = this.game.add.audio('game_start')
   }
 
   actionOnClick () {

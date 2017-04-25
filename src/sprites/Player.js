@@ -55,7 +55,7 @@ export default class extends Phaser.Sprite {
     this.dodgeSound = game.add.audio('swoosh')
     this.attackSound = game.add.audio('pillow_swing')
     this.shieldSound = game.add.audio('pillow_thud')
-    this.deathSound = game.add.audio('game_over')
+    this.deathSound = game.add.audio('death_sound')
   }
 
   animateWalkingUp () {

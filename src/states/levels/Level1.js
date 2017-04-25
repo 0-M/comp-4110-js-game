@@ -22,7 +22,6 @@ export default class extends Phaser.State {
     this.load.tilemap('level1map', 'assets/maps/entry_pretty.json', null, Phaser.Tilemap.TILED_JSON)
     this.load.image('tiles', 'assets/maps/tilesets/pretty.png')
     this.load.image('basic-sword', 'assets/spritesheets/items/equipment/basic-sword.png')
-    this.load.audio('circus_melody', 'assets/audio/circus_melody.wav')
   }
 
   create () {
