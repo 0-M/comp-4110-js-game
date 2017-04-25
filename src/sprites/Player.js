@@ -88,10 +88,12 @@ export default class extends Phaser.Sprite {
           this.shieldIsUp = true
         }
       } else if (this.cursors.attack.isDown) {
-        if (inventory.equippedWeapon.name === 'sword') {
-          this.animating = true
-          this.swordAttackSound.play()
-          this.handleSwordAttack()
+        if (inventory.equippedWeapon) {
+          if (inventory.equippedWeapon.name === 'sword') {
+            this.animating = true
+            this.swordAttackSound.play()
+            this.handleSwordAttack()
+          }
         } else {
           this.animating = true
           this.attackSound.play()
