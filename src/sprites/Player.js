@@ -6,12 +6,13 @@ export default class extends Phaser.Sprite {
   constructor ({game, x, y, asset}) {
     super(game, x, y, asset)
     this.anchor.setTo(0.5)
-    this.cursors = game.input.keyboard.addKeys({ 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'right': Phaser.KeyCode.D, 'attack': Phaser.KeyCode.SPACEBAR, 'dodge': Phaser.KeyCode.Q, 'die': Phaser.KeyCode.X })
+    this.cursors = game.input.keyboard.addKeys({ 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'right': Phaser.KeyCode.D, 'attack': Phaser.KeyCode.SPACEBAR, 'dodge': Phaser.KeyCode.Q, 'raise_shield': Phaser.KeyCode.X })
     // this.cursors = game.input.keyboard.createCursorKeys()
     this.moving = false
     this.animating = false
     this.dodging = false
     this.dead = false
+    this.shieldIsUp = false
 
     game.physics.arcade.enable(this)
     game.camera.follow(this)
@@ -54,8 +55,9 @@ export default class extends Phaser.Sprite {
     this.animations.add('die', [0, 32, 32, 32, 33, 33, 33, 34, 34, 34, 35, 35, 35, 36, 36, 36, 37, 37, 37, 38, 38, 38, 39, 39, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71])
 
     this.dodgeSound = game.add.audio('swoosh')
-    this.attackSound = game.add.audio('pillow_thud')
-    this.deathSound = game.add.audio('game_over')
+    this.attackSound = game.add.audio('pillow_swing')
+    this.shieldSound = game.add.audio('pillow_thud')
+    this.deathSound = game.add.audio('death_sound')
   }
 
   animateWalkingUp () {
@@ -143,28 +145,31 @@ export default class extends Phaser.Sprite {
       this.body.velocity.y = 0
     }
 
+    if (this.cursors.raise_shield.isUp) {
+      this.shieldIsUp = false
+    }
+
     if (!this.animating && !this.dead) {
-      if (this.cursors.die.isDown) {
-        this.animating = true
-        this.deathSound.play()
-        this.animateDeath()
+      if (this.cursors.raise_shield.isDown) {
+        this.frame = 92
+        if (!this.shieldIsUp) {
+          this.shieldSound.play()
+          this.shieldIsUp = true
+        }
       } else if (this.cursors.attack.isDown) {
+        this.animating = true
         this.attackSound.play()
         if (this.lastAnimation === 'up') {
           combat.attackUp(this)
-          this.animating = true
           this.animateAttackingUp()
         } else if (this.lastAnimation === 'down') {
           combat.attackDown(this)
-          this.animating = true
           this.animateAttackingDown()
         } else if (this.lastAnimation === 'left') {
           combat.attackLeft(this)
-          this.animating = true
           this.animateAttackingLeft()
         } else {
           combat.attackRight(this)
-          this.animating = true
           this.animateAttackingRight()
         }
       } else if (this.cursors.dodge.isDown) {

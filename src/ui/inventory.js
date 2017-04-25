@@ -18,7 +18,7 @@ class Inventory {
       this.space -= 1
       console.log('added an item!!! ' + this.space)
       itemObj.x = 100 * (this.inventory.length)
-      itemObj.y = 500
+      itemObj.y = 510
       itemObj.body.velocity.x = 0
       itemObj.body.velocity.y = 0
     } else {
@@ -32,7 +32,7 @@ class Inventory {
     var i = this.inventory.indexOf(itemObj)
     // if this is consume class, perform consume method here
     this.inventory.splice(i, 1)
-    itemObj.destroy()
+    itemObj.kill()
     this.space += 1
     this.inventory.forEach(this.moveItem)
     console.log('used an item!!! ' + itemObj.item_id)
@@ -41,7 +41,7 @@ class Inventory {
   removeItem (itemObj) {
     var i = this.inventory.indexOf(itemObj)
     this.inventory.splice(i, 1)
-    itemObj.destroy()
+    itemObj.kill()
     this.space += 1
     this.inventory.forEach(this.moveItem)
     console.log('removed an item!!! ' + itemObj.item_id)

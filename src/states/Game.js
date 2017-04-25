@@ -9,8 +9,6 @@ export default class extends Phaser.State {
   preload () {
     this.game.load.image('background', '/assets/images/menu_bg.png')
     this.game.load.image('newgame', '/assets/images/menu_new.png')
-    this.game.load.audio('intro_music', '/assets/audio/intro.wav')
-    this.game.load.audio('game_start', '/assets/audio/game_start.wav')
   }
 
   generateItems () {
@@ -61,8 +59,9 @@ export default class extends Phaser.State {
     this.game.add.existing(this.game.player)
     this.soundtrack = game.add.audio('intro_music')
     this.soundtrack.volume = 0.1  // Was a little too loud.
+    this.soundtrack.loop = true
     this.soundtrack.play()
-    this.game_start = game.add.audio('game_start')
+    this.game_start_sound = game.add.audio('gamestart_sound')
 
     // uncomment to show pizza
     // this.generateItems()
@@ -77,7 +76,7 @@ export default class extends Phaser.State {
   }
   actionOnClick () {
     this.soundtrack.stop()
-    this.game_start.play()
+    this.game_start_sound.play()
     this.game.state.start('Level1')
   }
 }
