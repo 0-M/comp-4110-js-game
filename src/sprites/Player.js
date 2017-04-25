@@ -6,7 +6,14 @@ export default class extends Phaser.Sprite {
   constructor ({game, x, y, asset}) {
     super(game, x, y, asset)
     this.anchor.setTo(0.5)
-    this.cursors = game.input.keyboard.addKeys({ 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'right': Phaser.KeyCode.D, 'attack': Phaser.KeyCode.SPACEBAR, 'dodge': Phaser.KeyCode.Q, 'raise_shield': Phaser.KeyCode.X })
+    this.cursors = game.input.keyboard.addKeys({ 'up': Phaser.KeyCode.W,
+                                                 'down': Phaser.KeyCode.S,
+                                                 'left': Phaser.KeyCode.A,
+                                                 'right': Phaser.KeyCode.D,
+                                                 'attack': Phaser.KeyCode.SPACEBAR,
+                                                 'sword_attack' : Phaser.KeyCode.C,
+                                                 'dodge': Phaser.KeyCode.Q,
+                                                 'raise_shield': Phaser.KeyCode.X })
     // this.cursors = game.input.keyboard.createCursorKeys()
     this.moving = false
     this.animating = false
@@ -53,11 +60,13 @@ export default class extends Phaser.Sprite {
     this.animations.add('rightdodge', [77, 78, 79, 80, 81, 79, 78, 9])
     this.animations.add('downdodge', [72, 73, 74, 75, 76, 74, 73, 1])
     this.animations.add('die', [0,32,32,32,33,33,33,34,34,34,35,35,35,36,36,36,37,37,37,38,38,38,39,39,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71])
+    this.animations.add('swordattack', [94,95,96,97,98,99,100,101,102,103,104])
 
     this.dodgeSound = game.add.audio('swoosh')
     this.attackSound = game.add.audio('pillow_swing')
     this.shieldSound = game.add.audio('pillow_thud')
     this.deathSound = game.add.audio('death_sound')
+    this.swordAttackSound = game.add.audio('sword_slash')
   }
 
   update () {
@@ -77,6 +86,10 @@ export default class extends Phaser.Sprite {
           this.shieldSound.play()
           this.shieldIsUp = true
         }
+      } else if (this.cursors.sword_attack.isDown) {
+        this.animating = true
+        this.swordAttackSound.play()
+        this.handleSwordAttack()
       } else if (this.cursors.attack.isDown) {
         this.animating = true
         this.attackSound.play()
@@ -196,6 +209,14 @@ export default class extends Phaser.Sprite {
       combat.attackRight(this)
       this.animateAttackingRight()
     }
+  }
+
+  animateSwordAttack() {
+    this.animations.play('swordattack', 16, false)
+    setTimeout(() => { this.setAnimatingFalse() }, this.attackDuration)
+  }
+  handleSwordAttack() {
+    this.animateSwordAttack()
   }
 
   //
