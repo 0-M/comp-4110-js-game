@@ -39,6 +39,7 @@ export default class extends Phaser.State {
     this.load.audio('punch_flurry', 'assets/audio/punch_flurry.wav')
     this.load.audio('monster_roar_bite', 'assets/audio/monster_roar_bite.wav')
     this.load.audio('claw_slash', 'assets/audio/claw_slash.wav')
+    this.load.audio('sword_slash', 'assets/audio/sword_slash.wav')
 
     this.load.audio('gamestart_sound', '/assets/audio/gamestart_sound.wav')
     this.load.audio('death_sound', 'assets/audio/death_sound.wav')
