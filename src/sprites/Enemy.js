@@ -152,7 +152,6 @@ export class Enemy extends Phaser.Sprite {
       this.attacking = true
       if (this.meleeCooldown === 0 && this.closeEnoughToPlayerToMelee()) {
         // do melee attack
-
         this.attackSound.play()
         this.animating = true
         this.animateAttacking(direction)
