@@ -25,7 +25,12 @@ class XP {
   }
 
   increaseBy (inxp) {
-    this.XP += inxp
+    if ((this.XP + inxp) >= this.XPToNextLevel) {
+      this.XP = (this.XP + inxp) - this.XPToNextLevel
+      this.level += 1
+    } else {
+      this.XP += inxp
+    }
     this.text.text = 'XP: ' + this.XP + ' / ' + this.XPToNextLevel + '\nLevel ' + this.level
   }
 }
