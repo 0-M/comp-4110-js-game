@@ -11,6 +11,7 @@ import { StrongClown } from '../../sprites/StrongClown'
 
 // import Weapon from '../../ui/item'
 import { Item } from '../../ui/item'
+import {Sword} from '../../sprites/Sword'
 import { Consumable } from '../../ui/item'
 
 export default class extends Phaser.State {
@@ -46,11 +47,9 @@ export default class extends Phaser.State {
   update () {
     this.game.physics.arcade.collide(this.player, this.collisionLayer)
     this.game.physics.arcade.collide(this.player, this.sword)
-    if (this.cola)
-    {
+    if (this.cola) {
       this.game.physics.arcade.collide(this.player, this.cola)
     }
-
 
     // if (!this.player.dodging) {
     //   // Player collide with enemies.
@@ -122,15 +121,11 @@ export default class extends Phaser.State {
     this.collisionLayer.resizeWorld()
 
     // Item init
-    var sword = new Item({
+    var sword = new Sword({
       game: this.game,
       x: 150,
       y: 150,
-      asset: 'basic-sword',
-      player: this.player,
-      itemId: 666,
-      stats_flat: [0, 10000, 0],
-      stats_per: [0, 0, 0]
+      player: this.player
     })
 
     var cola = new Item({
@@ -140,20 +135,20 @@ export default class extends Phaser.State {
       asset: 'cola',
       player: this.player,
       itemId: 420,
-      stats_flat: [10,0,0],
-      stats_per: [0,0,0],
-      dur: 10
+      stats_flat: [10, 0, 0],
+      stats_per: [0, 0, 0],
+      dur: 10,
+      consumable: true,
+      equippable: false
     })
-
 
     this.sword = sword
     this.cola = cola
     this.game.physics.enable(this.sword, Phaser.Physics.ARCADE)
     this.game.physics.enable(this.cola, Phaser.Physics.ARCADE)
     this.sword.body.onCollide = new Phaser.Signal()
-    if(this.cola)
-    {
-    this.cola.body.onCollide = new Phaser.Signal()
+    if (this.cola) {
+      this.cola.body.onCollide = new Phaser.Signal()
     }
     this.game.add.existing(this.sword)
     this.game.add.existing(this.cola)
@@ -212,8 +207,10 @@ export default class extends Phaser.State {
   togglePause () {
     this.game.physics.arcade.isPaused = !(this.game.physics.arcade.isPaused)
     if (this.game.physics.arcade.isPaused) {
+      this.game.paused = true
       pause.displayPauseScreen(this.game)
     } else {
+      this.game.paused = false
       pause.removePauseScreen(this.game)
     }
   }
@@ -261,19 +258,15 @@ export default class extends Phaser.State {
   // }
 
   moveCola () {
-    if (health.value < health.maxHealth)
-    {
-          console.log('coca cola')
-          this.cola.body.velocity.x = 0
-          this.cola.body.velocity.y = 0
-          this.cola.kill()
-          health.value = health.value
+    if (health.value < health.maxHealth) {
+      console.log('coca cola')
+      this.cola.body.velocity.x = 0
+      this.cola.body.velocity.y = 0
+      this.cola.kill()
+      health.value = health.value
         //  setTimeout(,1000)
-    }
-    else {
+    } else {
       this.player.inv.pickupItem(this.cola)
     }
   }
-
-
 }

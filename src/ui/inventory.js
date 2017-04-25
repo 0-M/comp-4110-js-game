@@ -10,6 +10,7 @@ class Inventory {
   constructor () {
     this.space = 5 // amount of EMPTY inventory spaces
     this.inventory = []
+    this.equippedWeapon = ''
   }
 
   pickupItem (itemObj) {
@@ -21,6 +22,8 @@ class Inventory {
       itemObj.y = 510
       itemObj.body.velocity.x = 0
       itemObj.body.velocity.y = 0
+      itemObj.inputEnabled = true
+      itemObj.events.onInputDown.add((sprite, pointer) => { this.useItem(sprite) }, this)
     } else {
       console.log("couldn't add an item! :(")
       itemObj.body.velocity.x = 0
@@ -29,13 +32,41 @@ class Inventory {
   }
 
   useItem (itemObj) {
-    var i = this.inventory.indexOf(itemObj)
-    // if this is consume class, perform consume method here
-    this.inventory.splice(i, 1)
-    itemObj.kill()
-    this.space += 1
-    this.inventory.forEach(this.moveItem)
-    console.log('used an item!!! ' + itemObj.item_id)
+    if (itemObj.equippable) {
+      if (itemObj.eqipped) {
+        if (itemObj.type === 'weapon') {
+          this.equippedWeapon = null
+        }
+        itemObj.checkmark.destroy()
+        itemObj.eqipped = false
+      } else {
+        if (itemObj.type === 'weapon') {
+          this.equippedWeapon = itemObj
+        }
+        itemObj.eqipped = true
+        itemObj.checkmark = itemObj.game.add.sprite(
+          itemObj.x + (itemObj.width / 2),
+          itemObj.y + (itemObj.height / 2),
+          'checkmark'
+        )
+        itemObj.checkmark.anchor.x = 0.5
+        itemObj.checkmark.anchor.y = 0.5
+      }
+    } else if (itemObj.consumable) {
+      var i = this.inventory.indexOf(itemObj)
+      this.inventory.splice(i, 1)
+      if (itemObj.use) {
+        itemObj.use()
+      } else {
+        console.log('object has no use()')
+      }
+      itemObj.kill()
+      this.space += 1
+      this.inventory.forEach(this.moveItem)
+      console.log('used an item!!! ' + itemObj.item_id)
+    } else {
+      console.log('CANT USE THIS ITEM: must be equippable or consumable')
+    }
   }
 
   removeItem (itemObj) {

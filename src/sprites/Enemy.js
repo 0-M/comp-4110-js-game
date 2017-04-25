@@ -148,7 +148,7 @@ export class Enemy extends Phaser.Sprite {
   // does all attacks from enemy to player
   // sets a cooldown timer for melee or other attack
   attack (direction) {
-    if (!this.attacking && !this.game.player.dead) {
+    if (!this.attacking && !this.game.player.dead && !this.game.paused) {
       this.attacking = true
       if (this.meleeCooldown === 0 && this.closeEnoughToPlayerToMelee()) {
         // do melee attack
