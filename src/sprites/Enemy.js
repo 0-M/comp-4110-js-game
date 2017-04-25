@@ -12,9 +12,9 @@ export class Enemy extends Phaser.Sprite {
 
     this.difficulty = difficulty
 
-    this.health = 100 * difficulty
+    this.health = 25 * difficulty
     this.damage = 5 * difficulty
-    this.defense = 10 * difficulty
+    this.defense = 2 * difficulty
     this.meleeTime = Math.max(1, (5 - difficulty))
     this.meleeCooldown = 0
     this.attacking = false
@@ -66,11 +66,13 @@ export class Enemy extends Phaser.Sprite {
       allowDiagonal: true,
       dontCrossCorners: true
     })
+    /*
     var myX = Math.round(this.x / this.game.tileWidth)
     var myY = Math.round(this.y / this.game.tileWidth)
     var playerTileX = Math.round(this.game.player.x / this.game.tileWidth)
     var playerTileY = Math.round(this.game.player.y / this.game.tileWidth)
     console.log('path to player: ' + this.finder.findPath(myX, myY, playerTileX, playerTileY, grid))
+    */
   }
 
   followPlayer () {
@@ -81,8 +83,8 @@ export class Enemy extends Phaser.Sprite {
     var playerTileX = Math.round(this.game.player.x / this.game.tileWidth)
     var playerTileY = Math.round(this.game.player.y / this.game.tileWidth)
     var path = this.finder.findPath(myX, myY, playerTileX, playerTileY, grid)
-    console.log('path to player: ' + path)
-//    path.pop()
+    // console.log('path to player: ' + path)
+    // path.pop()
     this.moveUsingPath(myX, myY, path)
   }
 

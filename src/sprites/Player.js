@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import { inventory } from '../ui/inventory'
+import {combat} from '../combat'
 
 export default class extends Phaser.Sprite {
   constructor ({game, x, y, asset}) {
@@ -23,6 +24,7 @@ export default class extends Phaser.Sprite {
     // var worn_weapon = new Weapon(game, x, y, asset, player, itemId, stats_flat, stats_per, is_worn, two_handed)
     // var worn_shield = new Shieldgame, x, y, asset, player, itemId, stats_flat, stats_per, is_worn, range)
     this.defense = 0
+    this.meleeAttack = 25
 
     this.walkSpeed = 150
     this.walkAnimSpeed = 6    // Frames per second
@@ -158,12 +160,16 @@ export default class extends Phaser.Sprite {
         this.animating = true
         this.attackSound.play()
         if (this.lastAnimation === 'up') {
+          combat.attackUp(this)
           this.animateAttackingUp()
         } else if (this.lastAnimation === 'down') {
+          combat.attackDown(this)
           this.animateAttackingDown()
         } else if (this.lastAnimation === 'left') {
+          combat.attackLeft(this)
           this.animateAttackingLeft()
         } else {
+          combat.attackRight(this)
           this.animateAttackingRight()
         }
       } else if (this.cursors.dodge.isDown) {
