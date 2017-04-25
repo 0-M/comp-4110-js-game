@@ -16,7 +16,7 @@ export default class extends Phaser.Sprite {
     game.physics.arcade.enable(this)
     game.camera.follow(this)
     this.inv = inventory
-    /** * Some ioeas
+    /** * Some ideas
       - When switching from inventory to active swap the x's and y's of the two items
       - Items might need an is visible -> talk to dan about how pause menu works
     ***/
@@ -50,91 +50,12 @@ export default class extends Phaser.Sprite {
     this.animations.add('leftdodge', [82, 83, 84, 85, 86, 84, 83, 5])
     this.animations.add('rightdodge', [77, 78, 79, 80, 81, 79, 78, 9])
     this.animations.add('downdodge', [72, 73, 74, 75, 76, 74, 73, 1])
-    this.animations.add('die', [0, 32, 32, 32, 33, 33, 33, 34, 34, 34, 35, 35, 35, 36, 36, 36, 37, 37, 37, 38, 38, 38, 39, 39, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71])
+    this.animations.add('die', [0,32,32,32,33,33,33,34,34,34,35,35,35,36,36,36,37,37,37,38,38,38,39,39,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71])
 
     this.dodgeSound = game.add.audio('swoosh')
     this.attackSound = game.add.audio('pillow_swing')
     this.shieldSound = game.add.audio('pillow_thud')
     this.deathSound = game.add.audio('death_sound')
-  }
-
-  animateWalkingUp () {
-    this.animations.play('upwalk', this.walkAnimSpeed, false)
-  }
-  animateWalkingDown () {
-    this.animations.play('downwalk', this.walkAnimSpeed, false)
-  }
-  animateWalkingLeft () {
-    this.animations.play('leftwalk', this.walkAnimSpeed, false)
-  }
-  animateWalkingRight () {
-    this.animations.play('rightwalk', this.walkAnimSpeed, false)
-  }
-
-  animateAttackingUp () {
-    this.animations.play('upattack', this.attackAnimSpeed, false)
-    setTimeout(() => { this.setAnimatingFalse() }, this.attackDuration)
-  }
-  animateAttackingDown () {
-    this.animations.play('downattack', this.attackAnimSpeed, false)
-    setTimeout(() => { this.setAnimatingFalse() }, this.attackDuration)
-  }
-  animateAttackingLeft () {
-    this.animations.play('leftattack', this.attackAnimSpeed, false)
-    setTimeout(() => { this.setAnimatingFalse() }, this.attackDuration)
-  }
-  animateAttackingRight () {
-    this.animations.play('rightattack', this.attackAnimSpeed, false)
-    setTimeout(() => { this.setAnimatingFalse() }, this.attackDuration)
-  }
-
-  animateDodgingUp () {
-    this.animations.play('updodge', this.dodgeAnimSpeed, false)
-    setTimeout(() => { this.setFalse() }, this.dodgeDuration)
-  }
-  animateDodgingDown () {
-    this.animations.play('downdodge', this.dodgeAnimSpeed, false)
-    setTimeout(() => { this.setFalse() }, this.dodgeDuration)
-  }
-  animateDodgingLeft () {
-    this.animations.play('leftdodge', this.dodgeAnimSpeed, false)
-    setTimeout(() => { this.setFalse() }, this.dodgeDuration)
-  }
-  animateDodgingRight () {
-    this.animations.play('rightdodge', this.dodgeAnimSpeed, false)
-    setTimeout(() => { this.setFalse() }, this.dodgeDuration)
-  }
-
-  animateDeath (callback) {
-    if (this.animations.currentAnim) {
-      this.animations.currentAnim.stop()
-    }
-    var currentState = this.game.state.current
-    this.game.state.states[currentState].soundtrack.stop()
-    this.deathSound.play()
-    this.animations.play('die', this.dieAnimSpeed, false)
-    setTimeout(() => {
-      this.setAnimatingFalse()
-      callback()
-    }, this.deathDuration)
-  }
-
-  setAnimatingFalse () {
-    this.animating = false
-  }
-
-  setMovingFalse () {
-    this.moving = false
-  }
-
-  setFalse () {
-    this.animating = false
-    this.moving = false
-    this.dodging = false
-  }
-
-  getDiagVect () {
-    return Math.sqrt(Math.pow(this.walkSpeed / 2, 2) * 2)
   }
 
   update () {
@@ -157,33 +78,13 @@ export default class extends Phaser.Sprite {
       } else if (this.cursors.attack.isDown) {
         this.animating = true
         this.attackSound.play()
-        if (this.lastAnimation === 'up') {
-          this.animateAttackingUp()
-        } else if (this.lastAnimation === 'down') {
-          this.animateAttackingDown()
-        } else if (this.lastAnimation === 'left') {
-          this.animateAttackingLeft()
-        } else {
-          this.animateAttackingRight()
-        }
+        this.animateAttacking()
       } else if (this.cursors.dodge.isDown) {
-        this.dodgeSound.play()
         this.moving = true
         this.animating = true
         this.dodging = true
-        if (this.lastAnimation === 'up') {
-          this.body.velocity.y = -this.dodgeSpeed
-          this.animateDodgingUp()
-        } else if (this.lastAnimation === 'down') {
-          this.body.velocity.y = this.dodgeSpeed
-          this.animateDodgingDown()
-        } else if (this.lastAnimation === 'left') {
-          this.body.velocity.x = -this.dodgeSpeed
-          this.animateDodgingLeft()
-        } else {
-          this.body.velocity.x = this.dodgeSpeed
-          this.animateDodgingRight()
-        }
+        this.dodgeSound.play()
+        this.animateDodging()
       } else {
         if (this.cursors.up.isDown && this.cursors.right.isDown) {
           this.body.velocity.y = -this.getDiagVect()
@@ -234,5 +135,126 @@ export default class extends Phaser.Sprite {
         }
       }
     }
+  }
+
+  getDiagVect () {
+    return Math.sqrt(Math.pow(this.walkSpeed / 2, 2) * 2)
+  }
+
+/*******************************************************************************
+        Animations.
+*******************************************************************************/
+
+  //
+  // Walking
+  //
+  animateWalkingUp () {
+    this.animations.play('upwalk', this.walkAnimSpeed, false)
+  }
+  animateWalkingDown () {
+    this.animations.play('downwalk', this.walkAnimSpeed, false)
+  }
+  animateWalkingLeft () {
+    this.animations.play('leftwalk', this.walkAnimSpeed, false)
+  }
+  animateWalkingRight () {
+    this.animations.play('rightwalk', this.walkAnimSpeed, false)
+  }
+
+  //
+  // Attacking
+  //
+  animateAttackingUp () {
+    this.animations.play('upattack', this.attackAnimSpeed, false)
+    setTimeout(() => { this.setAnimatingFalse() }, this.attackDuration)
+  }
+  animateAttackingDown () {
+    this.animations.play('downattack', this.attackAnimSpeed, false)
+    setTimeout(() => { this.setAnimatingFalse() }, this.attackDuration)
+  }
+  animateAttackingLeft () {
+    this.animations.play('leftattack', this.attackAnimSpeed, false)
+    setTimeout(() => { this.setAnimatingFalse() }, this.attackDuration)
+  }
+  animateAttackingRight () {
+    this.animations.play('rightattack', this.attackAnimSpeed, false)
+    setTimeout(() => { this.setAnimatingFalse() }, this.attackDuration)
+  }
+  animateAttacking() {
+    if (this.lastAnimation === 'up') {
+      this.animateAttackingUp()
+    } else if (this.lastAnimation === 'down') {
+      this.animateAttackingDown()
+    } else if (this.lastAnimation === 'left') {
+      this.animateAttackingLeft()
+    } else {
+      this.animateAttackingRight()
+    }
+  }
+
+  //
+  // Dodging
+  //
+  animateDodgingUp () {
+    this.animations.play('updodge', this.dodgeAnimSpeed, false)
+    setTimeout(() => { this.setFalse() }, this.dodgeDuration)
+  }
+  animateDodgingDown () {
+    this.animations.play('downdodge', this.dodgeAnimSpeed, false)
+    setTimeout(() => { this.setFalse() }, this.dodgeDuration)
+  }
+  animateDodgingLeft () {
+    this.animations.play('leftdodge', this.dodgeAnimSpeed, false)
+    setTimeout(() => { this.setFalse() }, this.dodgeDuration)
+  }
+  animateDodgingRight () {
+    this.animations.play('rightdodge', this.dodgeAnimSpeed, false)
+    setTimeout(() => { this.setFalse() }, this.dodgeDuration)
+  }
+  animateDodging() {
+    if (this.lastAnimation === 'up') {
+      this.body.velocity.y = -this.dodgeSpeed
+      this.animateDodgingUp()
+    } else if (this.lastAnimation === 'down') {
+      this.body.velocity.y = this.dodgeSpeed
+      this.animateDodgingDown()
+    } else if (this.lastAnimation === 'left') {
+      this.body.velocity.x = -this.dodgeSpeed
+      this.animateDodgingLeft()
+    } else {
+      this.body.velocity.x = this.dodgeSpeed
+      this.animateDodgingRight()
+    }
+  }
+
+  //
+  // Dying
+  //
+  animateDeath (callback) {
+    if (this.animations.currentAnim) {
+      this.animations.currentAnim.stop()
+    }
+    var currentState = this.game.state.current
+    this.game.state.states[currentState].soundtrack.stop()
+    this.deathSound.play()
+    this.animations.play('die', this.dieAnimSpeed, false)
+    setTimeout(() => {
+      this.setAnimatingFalse()
+      callback()
+    }, this.deathDuration)
+  }
+
+  setAnimatingFalse () {
+    this.animating = false
+  }
+
+  setMovingFalse () {
+    this.moving = false
+  }
+
+  setFalse () {
+    this.animating = false
+    this.moving = false
+    this.dodging = false
   }
 }
