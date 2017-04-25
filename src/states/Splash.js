@@ -13,7 +13,7 @@ export default class extends Phaser.State {
     //
     // load your assets
     //
-    this.load.image('checkmark', 'assets/images/checkmark.png')
+    this.load.image('selectionBox', 'assets/images/inv_sel_box.png')
     this.load.image('pizza', 'assets/images/pizza-1.png')
     this.load.spritesheet('knight', 'assets/images/knighter.png', 32, 48) // What is this still doing here?
 

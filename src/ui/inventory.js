@@ -37,20 +37,20 @@ class Inventory {
         if (itemObj.type === 'weapon') {
           this.equippedWeapon = null
         }
-        itemObj.checkmark.destroy()
+        itemObj.selectionBox.destroy()
         itemObj.eqipped = false
       } else {
         if (itemObj.type === 'weapon') {
           this.equippedWeapon = itemObj
         }
         itemObj.eqipped = true
-        itemObj.checkmark = itemObj.game.add.sprite(
+        itemObj.selectionBox = itemObj.game.add.sprite(
           itemObj.x + (itemObj.width / 2),
           itemObj.y + (itemObj.height / 2),
-          'checkmark'
+          'selectionBox'
         )
-        itemObj.checkmark.anchor.x = 0.5
-        itemObj.checkmark.anchor.y = 0.5
+        itemObj.selectionBox.anchor.x = 0.5
+        itemObj.selectionBox.anchor.y = 0.5
       }
     } else if (itemObj.consumable) {
       var i = this.inventory.indexOf(itemObj)
