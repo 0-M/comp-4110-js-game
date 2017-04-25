@@ -242,7 +242,6 @@ export default class extends Phaser.State {
   }
 
   resetPlayer () {
-    xp.increaseBy(1)
     this.player.tileX = 8
     this.player.tileY = 4.5
     this.player.position.set(this.player.tileX * this.tileWidth, this.player.tileY * this.tileWidth)
