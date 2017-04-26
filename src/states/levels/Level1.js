@@ -29,7 +29,7 @@ export default class extends Phaser.State {
     this.game.currentLevel = 'Level1'
     this.soundtrack = this.game.add.audio('circus_melody')
     this.soundtrack.loop = true
-    this.soundtrack.volume = 0.5
+    this.soundtrack.volume = 0.3
     this.soundtrack.play()
 
     this.game.add.tileSprite(0, 0, 800, 600, 'ui_backdrop')
@@ -69,6 +69,7 @@ export default class extends Phaser.State {
     }
     //console.log(this.enemies.length)
     if (Phaser.Rectangle.containsPoint(this.exitRect_1, this.player.position)) {
+      this.soundtrack.stop()
       this.game.state.start('Level3')
     }
 
