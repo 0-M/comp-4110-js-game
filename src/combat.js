@@ -30,7 +30,7 @@ class Combat {
     if (npc.health === 0) {
       xp.increaseBy(npc.difficulty)
       npc.playKilledSound()
-      npc.destroy()
+      npc.handleDeath()
     }
   }
 
