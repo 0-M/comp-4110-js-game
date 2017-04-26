@@ -62,6 +62,7 @@ export default class extends Phaser.State {
     this.soundtrack.loop = true
     this.soundtrack.play()
     this.game_start_sound = game.add.audio('gamestart_sound')
+    this.game.player.body.collideWorldBounds = true
 
     // uncomment to show pizza
     // this.generateItems()
