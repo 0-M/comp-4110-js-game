@@ -32,7 +32,7 @@ export default class extends Phaser.State {
     this.soundtrack.volume = 0.3
     this.soundtrack.play()
 
-    this.game.add.tileSprite(0, 0, 800, 600, 'ui_backdrop')
+    this.game.add.tileSprite(0, 0, 768, 600, 'ui_backdrop')
     this.game.tileWidth = this.tileWidth = 48
     this.setupTileMap()
     // this.sword
@@ -49,6 +49,9 @@ export default class extends Phaser.State {
     this.game.physics.arcade.collide(this.player, this.sword)
     if (this.cola) {
       this.game.physics.arcade.collide(this.player, this.cola)
+    }
+    if (this.superCola) {
+      this.game.physics.arcade.collide(this.player, this.superCola)
     }
 
     // if (!this.player.dodging) {
@@ -101,6 +104,7 @@ export default class extends Phaser.State {
     // Item collision detection
     this.sword.body.onCollide.add(this.moveSwordToInventory, this)
     this.cola.body.onCollide.add(this.moveCola, this)
+    this.superCola.body.onCollide.add(this.moveSuperCola, this)
   }
 
   setupTileMap () {
@@ -159,18 +163,54 @@ export default class extends Phaser.State {
       consumable: true,
       equippable: false
     })
-    console.log(cola.x)
-    console.log(cola.y)
+    var superCola = new Item({
+      game: this.game,
+      x: Math.floor(Math.random() * (400 - 100)) + 100,
+      y: Math.floor(Math.random() * (400 -100)) + 100,
+      asset: 'super_cola',
+      player: this.player,
+      itemId: 420,
+      stats_flat: [1000, 0, 0],
+      stats_per: [0, 0, 0],
+      dur: 10,
+      consumable: true,
+      equippable: false
+    })
+
+    cola.animations.add('rotate', [0,1,2,3,4,5,6,7,8,9,10,11,12,13])
+    superCola.animations.add('glow', [0,1,2,3,4,5,6,7,8,9,10,11])
+
+    cola.sound = game.add.audio('item_use')
+    superCola.sound = game.add.audio('item_use')
+
+    superCola.animations.add('glow', [0,1,2,3,4,5,6,7,8,9,10,11])
+
     this.sword = sword
     this.cola = cola
+    this.superCola = superCola
+
+    this.cola.animations.play('rotate', 6, true)
+    this.superCola.animations.play('glow', 12, true)
+
     this.game.physics.enable(this.sword, Phaser.Physics.ARCADE)
     this.game.physics.enable(this.cola, Phaser.Physics.ARCADE)
+    this.game.physics.enable(this.superCola, Phaser.Physics.ARCADE)
+
     this.sword.body.onCollide = new Phaser.Signal()
     if (this.cola) {
       this.cola.body.onCollide = new Phaser.Signal()
     }
+    if (this.superCola) {
+      this.superCola.body.onCollide = new Phaser.Signal()
+    }
     this.game.add.existing(this.sword)
     this.game.add.existing(this.cola)
+    this.game.add.existing(this.superCola)
+
+    this.superCola.body.sprite.scale.x = 1.5
+    this.superCola.body.sprite.scale.y = 1.5
+    this.superCola.body.sprite.antialiasing = false
+
     this.cola.body.sprite.scale.x = 2
     this.cola.body.sprite.scale.y = 2
     this.cola.body.sprite.antialiasing = false
@@ -283,11 +323,28 @@ export default class extends Phaser.State {
       console.log('coca cola')
       this.cola.body.velocity.x = 0
       this.cola.body.velocity.y = 0
+      this.cola.sound.play()
       this.cola.kill()
-      health.value = health.value
+      health.value = health.value+500
         //  setTimeout(,1000)
     } else {
       this.player.inv.pickupItem(this.cola)
     }
   }
+
+  moveSuperCola () {
+    if (health.value + 1000 < health.maxHealth) {
+      console.log('Super cola')
+      this.superCola.body.velocity.x = 0
+      this.superCola.body.velocity.y = 0
+      this.superCola.sound.play()
+      this.superCola.kill()
+      health.value = health.value+1000
+
+        //  setTimeout(,1000)
+    } else {
+      this.player.inv.pickupItem(this.superCola)
+    }
+  }
+
 }

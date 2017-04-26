@@ -27,12 +27,12 @@ export default class extends Phaser.State {
 
   create () {
     this.game.currentLevel = 'Level3'
-    this.soundtrack = this.game.add.audio('dungeon')
+    this.soundtrack = this.game.add.audio('intro_music')
     this.soundtrack.loop = true
     this.soundtrack.volume = 0.3
     this.soundtrack.play()
 
-    this.game.add.tileSprite(0, 0, 800, 600, 'ui_backdrop')
+    this.game.add.tileSprite(0, 0, 768, 600, 'ui_backdrop')
     this.game.tileWidth = this.tileWidth = 48
     this.setupTileMap()
     // this.sword

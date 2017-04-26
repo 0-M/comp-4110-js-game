@@ -41,8 +41,8 @@ export default class extends Phaser.State {
     */
 
     // The stuff before here is behind the background, and wont be seen
-    this.game.add.tileSprite(0, 0, 800, 600, 'background')
-    var newgame = this.game.add.button(350, 300, 'newgame', this.actionOnClick, this, 0, 0, 0)
+    this.game.add.tileSprite(0, 0, 768, 600, 'background')
+    var newgame = this.game.add.button(309.5, 300, 'newgame', this.actionOnClick, this, 0, 0, 0)
 
     this.tileWidth = 64
     // this.world.setBounds(0, 0, 4800, 4800)
@@ -57,11 +57,12 @@ export default class extends Phaser.State {
     })
 
     this.game.add.existing(this.game.player)
-    this.soundtrack = game.add.audio('intro_music')
+    this.soundtrack = game.add.audio('dungeon')
     this.soundtrack.volume = 0.3
     this.soundtrack.loop = true
     this.soundtrack.play()
     this.game_start_sound = game.add.audio('gamestart_sound')
+    this.game.player.body.collideWorldBounds = true
 
     // uncomment to show pizza
     // this.generateItems()

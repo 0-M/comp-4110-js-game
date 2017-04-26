@@ -2,7 +2,7 @@ import config from '../config'
 
 class Health {
   constructor () {
-    this.maxHealth = 2500
+    this.maxHealth = 1500
     this.value = this.maxHealth
     this.armor = 0
   }
