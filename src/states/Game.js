@@ -41,7 +41,7 @@ export default class extends Phaser.State {
     */
 
     // The stuff before here is behind the background, and wont be seen
-    this.game.add.tileSprite(0, 0, 800, 600, 'background')
+    this.game.add.tileSprite(0, 0, 768, 600, 'background')
     var newgame = this.game.add.button(350, 300, 'newgame', this.actionOnClick, this, 0, 0, 0)
 
     this.tileWidth = 64
