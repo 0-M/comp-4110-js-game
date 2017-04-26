@@ -7,8 +7,8 @@ export default class extends Phaser.State {
   init () {}
 
   preload () {
-    this.game.load.image('background', '/assets/images/menu_bg.png')
-    this.game.load.image('newgame', '/assets/images/menu_new.png')
+    this.game.load.image('background', 'assets/images/menu_bg.png')
+    this.game.load.image('newgame', 'assets/images/menu_new.png')
   }
 
   generateItems () {
