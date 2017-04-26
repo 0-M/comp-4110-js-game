@@ -5,7 +5,7 @@ export default class extends Phaser.State {
   init () {}
 
   preload () {
-    this.game.load.image('retry', '/assets/images/menu_retry.png')
+    this.game.load.image('retry', 'assets/images/menu_retry.png')
   }
 
   create () {

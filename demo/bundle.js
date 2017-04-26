@@ -7192,7 +7192,7 @@ var _class = function (_Phaser$State) {
   }, {
     key: 'preload',
     value: function preload() {
-      this.game.load.image('retry', '/assets/images/menu_retry.png');
+      this.game.load.image('retry', 'assets/images/menu_retry.png');
     }
   }, {
     key: 'create',
