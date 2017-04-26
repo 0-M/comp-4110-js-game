@@ -40,9 +40,9 @@ export default class extends Phaser.State {
     this.load.audio('monster_roar_bite', 'assets/audio/monster_roar_bite.wav')
     this.load.audio('claw_slash', 'assets/audio/claw_slash.wav')
     this.load.audio('sword_slash', 'assets/audio/sword_slash.wav')
-     this.load.audio('npc_killed_sound', 'assets/audio/npc_killed_sound.wav')
-    this.load.audio('dungeon','assets/audio/dungeon.wav')
-    
+    this.load.audio('npc_killed_sound', 'assets/audio/npc_killed_sound.wav')
+    this.load.audio('clownBoss_death_sound', 'assets/audio/clownBoss_death_sound.wav')
+
     this.load.audio('gamestart_sound', '/assets/audio/gamestart_sound.wav')
     this.load.audio('death_sound', 'assets/audio/death_sound.wav')
 
@@ -50,6 +50,7 @@ export default class extends Phaser.State {
     this.load.audio('intro_music', '/assets/audio/intro_music.wav')
     this.load.audio('circus_melody', 'assets/audio/circus_melody.wav')
     this.load.audio('gameover_music', 'assets/audio/gameover_music.wav')
+    this.load.audio('dungeon','assets/audio/dungeon.wav')
   }
 
   create () {

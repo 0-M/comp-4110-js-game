@@ -253,8 +253,8 @@ export default class extends Phaser.State {
     e = new SkinnyClown(this.game, 3, 3, 3)
     enemies.push(e)
 
-    e = new ClownBoss(this.game, 7, 7, 7)
-    enemies.push(e)
+    // e = new ClownBoss(this.game, 7, 7, 7)
+    // enemies.push(e)
 
     this.enemies = enemies
   }
