@@ -162,7 +162,9 @@ export default class extends Phaser.State {
     console.log(cola.x)
     console.log(cola.y)
     this.sword = sword
+    cola.animations.add('rotate', [0,1,2,3,4,5])
     this.cola = cola
+    this.cola.animations.play('rotate', 6, true)
     this.game.physics.enable(this.sword, Phaser.Physics.ARCADE)
     this.game.physics.enable(this.cola, Phaser.Physics.ARCADE)
     this.sword.body.onCollide = new Phaser.Signal()

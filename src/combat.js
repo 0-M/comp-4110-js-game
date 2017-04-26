@@ -27,7 +27,7 @@ class Combat {
     var newHealthVal = npc.health - ((weaponDmg * weaponMult) - npc.defense)
     newHealthVal = Math.max(newHealthVal, 0)
     npc.health = newHealthVal
-    if (npc.health === 0) {
+    if (npc.health === 0 && !npc.dead) {
       xp.increaseBy(npc.difficulty)
       npc.playKilledSound()
       npc.handleDeath()
