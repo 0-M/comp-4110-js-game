@@ -6,6 +6,7 @@ import BootState from './states/Boot'
 import SplashState from './states/Splash'
 import GameState from './states/Game'
 import Level1 from './states/levels/Level1'
+import Level3 from './states/levels/Level3'
 import GameOver from './states/GameOver'
 
 class Game extends Phaser.Game {
@@ -22,6 +23,7 @@ class Game extends Phaser.Game {
     this.state.add('Splash', SplashState, false)
     this.state.add('Game', GameState, false)
     this.state.add('Level1', Level1, false)
+    this.state.add('Level3', Level3, false)
     this.state.add('GameOver', GameOver, false)
 
     this.state.start('Boot')
