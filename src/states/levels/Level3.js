@@ -27,7 +27,7 @@ export default class extends Phaser.State {
 
   create () {
     this.game.currentLevel = 'Level3'
-    this.soundtrack = this.game.add.audio('dungeon')
+    this.soundtrack = this.game.add.audio('intro_music')
     this.soundtrack.loop = true
     this.soundtrack.volume = 0.3
     this.soundtrack.play()
