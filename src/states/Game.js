@@ -77,6 +77,6 @@ export default class extends Phaser.State {
   actionOnClick () {
     this.soundtrack.stop()
     this.game_start_sound.play()
-    this.game.state.start('Level1')
+    this.game.state.start('Story1')
   }
 }
