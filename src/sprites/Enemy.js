@@ -21,6 +21,7 @@ export class Enemy extends Phaser.Sprite {
     this.setupPathFinding()
 
     this.animating = false
+    this.dead = false
 
     this.lastAnimation = 'down'
     this.animations.add('upwalk', [12, 13, 14, 15])
@@ -133,8 +134,10 @@ export class Enemy extends Phaser.Sprite {
   }
 
   update () {
-    this.followPlayer()
-    this.attack(this.lastAnimation)
+    if (!this.dead) {
+      this.followPlayer()
+      this.attack(this.lastAnimation)
+    }
   }
 
   closeEnoughToPlayerToMelee () {
@@ -173,6 +176,13 @@ export class Enemy extends Phaser.Sprite {
         }, 1000)
       }
     }
+  }
+
+  handleDeath () {
+    this.dead = true
+    this.animating = true
+    this.animations.play('die', this.deathAnimSpeed, false)
+    setTimeout(() => {this.destroy()}, this.deathDuration);
   }
 
   playKilledSound() {
