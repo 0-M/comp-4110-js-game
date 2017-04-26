@@ -2318,7 +2318,7 @@ var Health = function () {
   function Health() {
     _classCallCheck(this, Health);
 
-    this.maxHealth = 2500;
+    this.maxHealth = 1500;
     this.value = this.maxHealth;
     this.armor = 0;
   }
@@ -4963,7 +4963,7 @@ var Combat = function () {
       var newHealthVal = npc.health - (weaponDmg * weaponMult - npc.defense);
       newHealthVal = Math.max(newHealthVal, 0);
       npc.health = newHealthVal;
-      if (npc.health === 0) {
+      if (npc.health === 0 && !npc.dead) {
         _xp.xp.increaseBy(npc.difficulty);
         npc.playKilledSound();
         npc.handleDeath();
@@ -6785,7 +6785,7 @@ var Game = function (_Phaser$Game) {
     // const docElement = document.documentElement
     // const width = docElement.clientWidth > config.gameWidth ? config.gameWidth : docElement.clientWidth
     // const height = docElement.clientHeight > config.gameHeight ? config.gameHeight : docElement.clientHeight
-    var width = 800;
+    var width = 768;
     var height = 600;
 
     var _this = _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this, width, height, _phaser2.default.CANVAS, 'content', null));
@@ -7096,8 +7096,8 @@ var _class = function (_Phaser$State) {
       */
 
       // The stuff before here is behind the background, and wont be seen
-      this.game.add.tileSprite(0, 0, 800, 600, 'background');
-      var newgame = this.game.add.button(350, 300, 'newgame', this.actionOnClick, this, 0, 0, 0);
+      this.game.add.tileSprite(0, 0, 768, 600, 'background');
+      var newgame = this.game.add.button(309.5, 300, 'newgame', this.actionOnClick, this, 0, 0, 0);
 
       this.tileWidth = 64;
       // this.world.setBounds(0, 0, 4800, 4800)
@@ -7112,11 +7112,12 @@ var _class = function (_Phaser$State) {
       });
 
       this.game.add.existing(this.game.player);
-      this.soundtrack = game.add.audio('intro_music');
+      this.soundtrack = game.add.audio('dungeon');
       this.soundtrack.volume = 0.3;
       this.soundtrack.loop = true;
       this.soundtrack.play();
       this.game_start_sound = game.add.audio('gamestart_sound');
+      this.game.player.body.collideWorldBounds = true;
 
       // uncomment to show pizza
       // this.generateItems()
@@ -7309,6 +7310,7 @@ var _class = function (_Phaser$State) {
       this.load.audio('sword_slash', 'assets/audio/sword_slash.wav');
       this.load.audio('npc_killed_sound', 'assets/audio/npc_killed_sound.wav');
       this.load.audio('clownBoss_death_sound', 'assets/audio/clownBoss_death_sound.wav');
+      this.load.audio('item_use', 'assets/audio/item_use.wav');
 
       this.load.audio('gamestart_sound', '/assets/audio/gamestart_sound.wav');
       this.load.audio('death_sound', 'assets/audio/death_sound.wav');
@@ -7415,7 +7417,7 @@ var _class = function (_Phaser$State) {
       this.soundtrack.volume = 0.3;
       this.soundtrack.play();
 
-      this.game.add.tileSprite(0, 0, 800, 600, 'ui_backdrop');
+      this.game.add.tileSprite(0, 0, 768, 600, 'ui_backdrop');
       this.game.tileWidth = this.tileWidth = 48;
       this.setupTileMap();
       // this.sword
@@ -7433,6 +7435,9 @@ var _class = function (_Phaser$State) {
       this.game.physics.arcade.collide(this.player, this.sword);
       if (this.cola) {
         this.game.physics.arcade.collide(this.player, this.cola);
+      }
+      if (this.superCola) {
+        this.game.physics.arcade.collide(this.player, this.superCola);
       }
 
       // if (!this.player.dodging) {
@@ -7485,6 +7490,7 @@ var _class = function (_Phaser$State) {
       // Item collision detection
       this.sword.body.onCollide.add(this.moveSwordToInventory, this);
       this.cola.body.onCollide.add(this.moveCola, this);
+      this.superCola.body.onCollide.add(this.moveSuperCola, this);
     }
   }, {
     key: 'setupTileMap',
@@ -7544,18 +7550,54 @@ var _class = function (_Phaser$State) {
         consumable: true,
         equippable: false
       });
-      console.log(cola.x);
-      console.log(cola.y);
+      var superCola = new _item.Item({
+        game: this.game,
+        x: Math.floor(Math.random() * (400 - 100)) + 100,
+        y: Math.floor(Math.random() * (400 - 100)) + 100,
+        asset: 'super_cola',
+        player: this.player,
+        itemId: 420,
+        stats_flat: [1000, 0, 0],
+        stats_per: [0, 0, 0],
+        dur: 10,
+        consumable: true,
+        equippable: false
+      });
+
+      cola.animations.add('rotate', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
+      superCola.animations.add('glow', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+
+      cola.sound = game.add.audio('item_use');
+      superCola.sound = game.add.audio('item_use');
+
+      superCola.animations.add('glow', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+
       this.sword = sword;
       this.cola = cola;
+      this.superCola = superCola;
+
+      this.cola.animations.play('rotate', 6, true);
+      this.superCola.animations.play('glow', 12, true);
+
       this.game.physics.enable(this.sword, _phaser2.default.Physics.ARCADE);
       this.game.physics.enable(this.cola, _phaser2.default.Physics.ARCADE);
+      this.game.physics.enable(this.superCola, _phaser2.default.Physics.ARCADE);
+
       this.sword.body.onCollide = new _phaser2.default.Signal();
       if (this.cola) {
         this.cola.body.onCollide = new _phaser2.default.Signal();
       }
+      if (this.superCola) {
+        this.superCola.body.onCollide = new _phaser2.default.Signal();
+      }
       this.game.add.existing(this.sword);
       this.game.add.existing(this.cola);
+      this.game.add.existing(this.superCola);
+
+      this.superCola.body.sprite.scale.x = 1.5;
+      this.superCola.body.sprite.scale.y = 1.5;
+      this.superCola.body.sprite.antialiasing = false;
+
       this.cola.body.sprite.scale.x = 2;
       this.cola.body.sprite.scale.y = 2;
       this.cola.body.sprite.antialiasing = false;
@@ -7679,11 +7721,28 @@ var _class = function (_Phaser$State) {
         console.log('coca cola');
         this.cola.body.velocity.x = 0;
         this.cola.body.velocity.y = 0;
+        this.cola.sound.play();
         this.cola.kill();
-        _health.health.value = _health.health.value;
+        _health.health.value = _health.health.value + 500;
         //  setTimeout(,1000)
       } else {
         this.player.inv.pickupItem(this.cola);
+      }
+    }
+  }, {
+    key: 'moveSuperCola',
+    value: function moveSuperCola() {
+      if (_health.health.value + 1000 < _health.health.maxHealth) {
+        console.log('Super cola');
+        this.superCola.body.velocity.x = 0;
+        this.superCola.body.velocity.y = 0;
+        this.superCola.sound.play();
+        this.superCola.kill();
+        _health.health.value = _health.health.value + 1000;
+
+        //  setTimeout(,1000)
+      } else {
+        this.player.inv.pickupItem(this.superCola);
       }
     }
   }]);
@@ -7772,12 +7831,12 @@ var _class = function (_Phaser$State) {
     key: 'create',
     value: function create() {
       this.game.currentLevel = 'Level3';
-      this.soundtrack = this.game.add.audio('dungeon');
+      this.soundtrack = this.game.add.audio('intro_music');
       this.soundtrack.loop = true;
       this.soundtrack.volume = 0.3;
       this.soundtrack.play();
 
-      this.game.add.tileSprite(0, 0, 800, 600, 'ui_backdrop');
+      this.game.add.tileSprite(0, 0, 768, 600, 'ui_backdrop');
       this.game.tileWidth = this.tileWidth = 48;
       this.setupTileMap();
       // this.sword
