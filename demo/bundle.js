@@ -7060,8 +7060,8 @@ var _class = function (_Phaser$State) {
   }, {
     key: 'preload',
     value: function preload() {
-      this.game.load.image('background', '/assets/images/menu_bg.png');
-      this.game.load.image('newgame', '/assets/images/menu_new.png');
+      this.game.load.image('background', 'assets/images/menu_bg.png');
+      this.game.load.image('newgame', 'assets/images/menu_new.png');
     }
   }, {
     key: 'generateItems',
@@ -7312,11 +7312,11 @@ var _class = function (_Phaser$State) {
       this.load.audio('clownBoss_death_sound', 'assets/audio/clownBoss_death_sound.wav');
       this.load.audio('item_use', 'assets/audio/item_use.wav');
 
-      this.load.audio('gamestart_sound', '/assets/audio/gamestart_sound.wav');
+      this.load.audio('gamestart_sound', 'assets/audio/gamestart_sound.wav');
       this.load.audio('death_sound', 'assets/audio/death_sound.wav');
 
       // Soundtracks
-      this.load.audio('intro_music', '/assets/audio/intro_music.wav');
+      this.load.audio('intro_music', 'assets/audio/intro_music.wav');
       this.load.audio('circus_melody', 'assets/audio/circus_melody.wav');
       this.load.audio('gameover_music', 'assets/audio/gameover_music.wav');
       this.load.audio('dungeon', 'assets/audio/dungeon.wav');
